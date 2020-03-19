@@ -4,11 +4,13 @@
 
 **Projekt:** 1
 
-**Zadanie:** XX
+**Zadanie:** 
 
-**Temat:** Xxxx
+**Temat:** "Diagnostyka cukrzycy: stężenie glukozy we krwi (liczba rzeczywista
+), obecność glikowanej hemoglobiny GHB (wartość logiczna) i poziom cukru w moczu
+(liczba rzeczywista)"
 
-**Zespol:** Xxxx Xxxx, Yyyy Yyyy
+**Zespol:** Magdalena Kotynia, Szymon Kruszewski
 
 **Biblioteki:** Xxxx
 
