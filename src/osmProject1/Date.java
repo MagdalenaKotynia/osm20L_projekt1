@@ -3,12 +3,16 @@ package osmProject1;
 public class Date {
 
 	/*Attributes of data type class, used for storage of examination date */
-	private Integer mDay;
-	private Integer mMonth;
-	private Integer mYear;
+	private Integer mDay = 20;
+	private Integer mMonth = 2;			/*I've added default values in order to make prospective debugging easier */
+	private Integer mYear = 1998;
 	private static final int NumOfDays[]= {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	
 	/* Class constructor */
+	public Date() {
+		/*Same as for default values. May come in handy in the near future.*/
+	}
+	
 	public Date(Integer d, Integer m, Integer y) {
 		
 		this.setDate(d, m, y);
@@ -53,7 +57,9 @@ public class Date {
 			return(true);
 		}
 	}
-	/*Comparing method*/		// TODO Not sure about this one, I have not managed to read the third lecture yet. 
+	/*Comparing method*/		
+	// TODO Not sure about this one, I have not managed to read the third lecture yet. 
+	// TODO Verify whether if condition is valid (may require using static equal, doubtful but better to be safe than sorry)
 	public boolean equals(Date d) {
 		if(d==null || this.mYear!=d.mYear || this.mMonth!=d.mMonth || this.mDay!=d.mDay) {
 			return(false);
