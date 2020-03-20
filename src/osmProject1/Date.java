@@ -1,5 +1,5 @@
 package osmProject1;
-
+// TODO consider inheritance after Examination class
 public class Date {
 
 	/*Attributes of data type class, used for storage of examination date */
@@ -8,11 +8,12 @@ public class Date {
 	private Integer mYear = 1998;
 	private static final int NumOfDays[]= {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	
-	/* Class constructor */
+	/*Default class constructor*/
 	public Date() {
 		/*Same as for default values. May come in handy in the near future.*/
 	}
 	
+	/* Class constructor */
 	public Date(Integer d, Integer m, Integer y) {
 		
 		this.setDate(d, m, y);
@@ -46,6 +47,16 @@ public class Date {
 			this.mMonth = m;
 			this.mYear = y;
 		}
+	}
+	// TODO add verifying method
+	public void setDay(Integer d) {
+		this.mDay=d;
+	}
+	public void setMonth(Integer m) {
+		this.mMonth=m;
+	}
+	public void setYear(Integer y) {
+		this.mYear=y;
 	}
 	
 	/* Method for verifying validity of given date*/
