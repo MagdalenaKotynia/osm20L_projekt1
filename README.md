@@ -4,7 +4,7 @@
 
 **Projekt:** 1
 
-**Zadanie:** 
+**Zadanie:** Tworzenie interfejsu graficznego aplikacji
 
 **Temat:** "Diagnostyka cukrzycy: stężenie glukozy we krwi (liczba rzeczywista
 ), obecność glikowanej hemoglobiny GHB (wartość logiczna) i poziom cukru w moczu
