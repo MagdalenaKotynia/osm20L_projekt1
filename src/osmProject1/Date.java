@@ -1,30 +1,30 @@
 package osmProject1;
-// TODO consider inheritance after Examination class
+
+
 public class Date {
 
 	/*Attributes of data type class, used for storage of examination date */
-	private Integer mDay = 20;
-	private Integer mMonth = 2;			/*I've added default values in order to make prospective debugging easier */
-	private Integer mYear = 1998;
+	private Integer mDay;
+	private Integer mMonth;			
+	private Integer mYear;
 	private static final int NumOfDays[]= {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	
 	/*Default class constructor*/
 	public Date() {
-		/*Same as for default values. May come in handy in the near future.*/
 	}
 	
 	/* Class constructor */
 	public Date(Integer d, Integer m, Integer y) {
-		
+		if(checkDate(d, m, y)) {
 		this.setDate(d, m, y);
-		
+		}
 	}
 
 	/* Copying constructor */
 	public Date(Date date) {
 	
 	this(date.mDay, date.mMonth, date.mYear);
-		
+	
 	}
 	
 	
@@ -48,15 +48,21 @@ public class Date {
 			this.mYear = y;
 		}
 	}
-	// TODO add verifying method
+
 	public void setDay(Integer d) {
+		if(d>=1 && d<=31) {
 		this.mDay=d;
+		}
 	}
 	public void setMonth(Integer m) {
+		if(m>=1 && m<=12) {
 		this.mMonth=m;
+		}
 	}
 	public void setYear(Integer y) {
+		if(y>=0) {
 		this.mYear=y;
+		}
 	}
 	
 	/* Method for verifying validity of given date*/
@@ -68,9 +74,7 @@ public class Date {
 			return(true);
 		}
 	}
-	/*Comparing method*/		
-	// TODO Not sure about this one, I have not managed to read the third lecture yet. 
-	// TODO Verify whether if condition is valid (may require using static equal, doubtful but better to be safe than sorry)
+	/*Comparing method*/	// TODO Might require some tweaking in order to use ArrayList methods
 	public boolean equals(Date d) {
 		if(d==null || this.mYear!=d.mYear || this.mMonth!=d.mMonth || this.mDay!=d.mDay) {
 			return(false);
