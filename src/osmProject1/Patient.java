@@ -9,7 +9,7 @@ public class Patient {
 	private String mSurname = "Kowalski";
 	private String mPESEL = "99033000987";
 	private String mInsurance = "NFZ";			// TODO Consider using Enum for Insurance and Gender ---- extra-curricular xD
-	private String mGender = "Mężczyzna";
+	private String mGender = "Mezczyzna";
 	private Examination mExam = null;			
 	
 
@@ -79,20 +79,29 @@ public class Patient {
 			return(true);
 		}
 	}
-	/*Comparing method*/							// TODO Might require some tweaking in order to use ArrayList methods
-	public boolean equals(Patient p) {
-		if(p==null || this.mName!=p.mName || this.mSurname!=p.mSurname || this.mPESEL!=p.mPESEL || 
-				this.mInsurance!=p.mInsurance ||this.mGender!=p.mGender || this.mExam!=p.mExam) {
-			return(false);
-		}else {
-			return(true);
+
+	public boolean equals(Object obj) {
+		if (this==obj)
+			return true;
+		if (obj==null || this.getClass()!=obj.getClass())
+			return false;
+		Patient other = (Patient) obj;
+		if (this.mPESEL==null) {
+			if (other.mPESEL!=null)
+				return(false);
 		}
+		else if (!this.mPESEL.equals(other.mPESEL))
+			return(false);
+		return(true);
 	}
+	
 	/*Printing method*/
 	public String toString() {
-		return("Imię: " + this.mName +" Nazwisko: " + this.mSurname + " PESEL: " + this.mPESEL + " Ubezpieczenie: " + 
-	this.mInsurance + " Płeć: " + this.mGender);
+		return("Imie: " + this.mName +" Nazwisko: " + this.mSurname + " PESEL: " + this.mPESEL + " Ubezpieczenie: " + 
+	this.mInsurance + " Plec: " + this.mGender);
 	}
+	
+	
 	
 	}
 
