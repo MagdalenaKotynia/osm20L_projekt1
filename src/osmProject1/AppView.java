@@ -11,6 +11,7 @@ public class AppView extends JFrame implements ActionListener {
 
 	/* Attributes */
 	
+	// constructor
 	public AppView() {
 		
 		this.setFrame();
@@ -21,7 +22,7 @@ public class AppView extends JFrame implements ActionListener {
 		
 	}
 	
-	/*			METHOD FOR WINDOW CLOSING */
+	/*			METHOD FOR WINDOW CLOSING  not implemented yet but it will be used */
 	public void actionPerformed(ActionEvent evt) {
 		if (evt.getActionCommand().equals("Zamknij")) {
 			this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
@@ -33,6 +34,7 @@ public class AppView extends JFrame implements ActionListener {
 	
 	private void setGui() {
 		
+		// Main Panel for placing other panels
 		JPanel mainPanel = new JPanel();
 		this.getContentPane().add(mainPanel);
 		mainPanel.setPreferredSize(new Dimension(1000, 600));
@@ -56,7 +58,6 @@ public class AppView extends JFrame implements ActionListener {
 		c.gridx = 0;
 		c.gridy = 0;
 		mainPanel.add(patientPanel,c);
-		patientPanel.setPreferredSize(new Dimension(400, 350));
 		patientPanel.setBorder(BorderFactory.createTitledBorder("Dane pacjenta"));
 		
 		// Examination Panel
@@ -67,7 +68,6 @@ public class AppView extends JFrame implements ActionListener {
 		c.gridx=0;
 		c.gridy=1;
 		mainPanel.add(examPanel,c);
-		examPanel.setPreferredSize(new Dimension(00, 250));
 		examPanel.setBorder(BorderFactory.createTitledBorder("Badanie"));
 		
 		// List Panel
@@ -79,12 +79,26 @@ public class AppView extends JFrame implements ActionListener {
 		c.gridy=0;
 		c.gridheight=2;
 		mainPanel.add(listPanel,c);
-		listPanel.setPreferredSize(new Dimension(600, 200));
 		listPanel.setBorder(BorderFactory.createTitledBorder("Lista pacjentow"));
 		
+		// Setting layout for patient panel
+		GroupLayout patientLayout = new GroupLayout(patientPanel);
+		patientPanel.setLayout(patientLayout);
+		
+		// patient panel components
+		JLabel name = new JLabel("Imie:");
+		JTextField nameTextField = new JTextField();
+		JLabel surname = new JLabel("Nazwisko:");
+		JTextField surnameTextField = new JTextField();
+		JLabel pesel = new JLabel("PESEL:");
+		JTextField peselTextField = new JTextField();
+		JLabel gender = new JLabel("Plec:");
+		JLabel insurance =  new JLabel("Ubezpieczenie:");
 		
 		
-		
+		patientLayout.setAutoCreateGaps(true);
+		// not working
+		patientLayout.setHorizontalGroup(patientLayout.createSequentialGroup().addGroup(patientLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(name).addComponent(surname).addComponent(pesel).addComponent(gender).addComponent(gender)));
 		
 		
 		
