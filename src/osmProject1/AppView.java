@@ -1,9 +1,13 @@
 package osmProject1;
 import javax.swing.*;
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+import java.awt.GridLayout;
 
 
-public class AppView extends JFrame {
+public class AppView extends JFrame implements ActionListener {
 
 	/* Attributes */
 	
@@ -12,41 +16,48 @@ public class AppView extends JFrame {
 		this.setFrame();
 		this.setGui();
 		this.setMenu();
-		this.setPatientPanel();
 		
 		
-		
-		
-		/*
-		
-		
-		
-		
-		JMenuBar menu = new JMenuBar();
-		mainPanel.add(BorderLayout.NORTH, menu);
-		
-		
-		JPanel patientPanel = new JPanel();
-		mainPanel.add(BorderLayout.WEST, patientPanel);
-		patientPanel.setBackground(Color.red);
-		patientPanel.setPreferredSize(new Dimension(300, 400));
-		
-		
-		patientPanel.setBorder(BorderFactory.createTitledBorder("Pacjent"));
-		
-		
-		*/
 	}
+	
+	/*			METHOD FOR WINDOW CLOSING */
+	public void actionPerformed(ActionEvent evt) {
+		if (evt.getActionCommand().equals("Zamknij")) {
+			this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+		}
+	}
+	
+	
+	
 	
 	private void setGui() {
 		
 		JPanel mainPanel = new JPanel();
 		this.getContentPane().add(mainPanel);
-		mainPanel.setPreferredSize(new Dimension(800, 600));
+		mainPanel.setPreferredSize(new Dimension(1000, 600));
 		mainPanel.setBackground(Color.gray);
 		this.pack();
 		
-		mainPanel.setLayout(new BorderLayout());
+		GridLayout mainLayout = new GridLayout(2, 1);
+		mainPanel.setLayout(mainLayout);
+		
+		
+		JPanel patientPanel = new JPanel();
+		mainPanel.add(patientPanel);
+		patientPanel.setBackground(Color.gray);
+		patientPanel.setPreferredSize(new Dimension(300, 400));
+		patientPanel.setBorder(BorderFactory.createTitledBorder("Dane pacjenta"));
+		
+		JPanel examPanel = new JPanel();
+		mainPanel.add(examPanel);
+		examPanel.setPreferredSize(new Dimension(300, 500));
+		examPanel.setBorder(BorderFactory.createTitledBorder("Badanie"));
+		
+		JPanel listPanel = new JPanel();
+		mainPanel.add(listPanel);
+		listPanel.setPreferredSize(new Dimension(700, 600));
+		listPanel.setBorder(BorderFactory.createTitledBorder("Lista pacjentow"));
+		
 		
 		
 	}
@@ -56,7 +67,7 @@ public class AppView extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(800, 600);
 		this.setVisible(true);
-		this.setTitle("Rejestracja wyników badań");
+		this.setTitle("Rejestracja wynikow badan");
 	}
 	
 	private void setMenu() {
@@ -69,13 +80,10 @@ public class AppView extends JFrame {
 		menuBar.add(menu);
 		
 		JMenuItem menuItem = new JMenuItem("Zamknij");
-		// menuItem.addActionListener(this);				//add thread handling
+		//menuItem.addActionListener(this);				//add thread handling   need AppControler for proper work
 		menu.add(menuItem);
 	}
 	
-	private void setPatientPanel() {
-		
-	}
-	
+
 
 }
