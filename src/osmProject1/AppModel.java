@@ -3,6 +3,8 @@ import java.util.*;
 
 public class AppModel {
 
+	/*Random code, just for future reference*/
+	/* Attributes */
 	private ArrayList<Patient> mList = new ArrayList<>();
 
 	
@@ -11,14 +13,12 @@ public class AppModel {
 		
 	}
 	
-	
-	public void addPatient(String n, String s, String p, String i, String g, Examination e){
-		e=null;
-		this.mList.add(new Patient(n, s, p, i, g, e));
+	public void addPatient(Patient p)
+	{
+		this.mList.add(p);
 	}
 	
-	public void removePatient(int index){
-		this.mList.remove(index);
+	public void removePatient(Patient p)
+	{
+		this.mList.remove(p);
 	}
-
-}

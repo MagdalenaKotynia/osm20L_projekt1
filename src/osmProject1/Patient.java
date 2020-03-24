@@ -1,5 +1,7 @@
 package osmProject1;
 
+
+
 public class Patient {
 
 	/*Attributes of data type class */
