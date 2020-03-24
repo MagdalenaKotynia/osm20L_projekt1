@@ -14,9 +14,9 @@ public class Date {
 	}
 	
 	/* Class constructor */
-	public Date(Integer d, Integer m, Integer y) {
-		if(checkDate(d, m, y)) {
-		this.setDate(d, m, y);
+	public Date(Integer day, Integer month, Integer year) {
+		if(checkDate(day, month, year)) {
+		this.setDate(day, month, year);
 		}
 	}
 
@@ -41,42 +41,42 @@ public class Date {
 	}
 	
 	/*Setters*/
-	public void setDate(Integer d, Integer m, Integer y) {
-		if (Date.checkDate(d, m, y)) {
-			this.mDay = d;
-			this.mMonth = m;
-			this.mYear = y;
+	public void setDate(Integer day, Integer month, Integer year) {
+		if (Date.checkDate(day, month, year)) {
+			this.mDay = day;
+			this.mMonth = month;
+			this.mYear = year;
 		}
 	}
 
-	public void setDay(Integer d) {
-		if(d>=1 && d<=31) {
-		this.mDay=d;
+	public void setDay(Integer day) {
+		if(day>=1 && day<=31) {
+		this.mDay=day;
 		}
 	}
-	public void setMonth(Integer m) {
-		if(m>=1 && m<=12) {
-		this.mMonth=m;
+	public void setMonth(Integer month) {
+		if(month>=1 && month<=12) {
+		this.mMonth=month;
 		}
 	}
-	public void setYear(Integer y) {
-		if(y>=0) {
-		this.mYear=y;
+	public void setYear(Integer year) {
+		if(year>=0) {
+		this.mYear=year;
 		}
 	}
 	
 	/* Method for verifying validity of given date*/
 	// TODO Verify whether .intValue is necessary 
-	public static boolean checkDate(Integer d, Integer m, Integer y) {
-		if(y.intValue()==0 || m.intValue()<1 || m.intValue()>12 || d.intValue()<1 || d.intValue()>Date.NumOfDays[m-1]) {
+	public static boolean checkDate(Integer day, Integer month, Integer year) {
+		if(year.intValue()==0 || month.intValue()<1 || month.intValue()>12 || day.intValue()<1 || day.intValue()>Date.NumOfDays[month-1]) {
 			return(false);
 		}else {
 			return(true);
 		}
 	}
 	/*Comparing method*/	// TODO Might require some tweaking in order to use ArrayList methods
-	public boolean equals(Date d) {
-		if(d==null || this.mYear!=d.mYear || this.mMonth!=d.mMonth || this.mDay!=d.mDay) {
+	public boolean equals(Date date) {
+		if(date==null || this.mYear!=date.mYear || this.mMonth!=date.mMonth || this.mDay!=date.mDay) {
 			return(false);
 		}else {
 			return(true);

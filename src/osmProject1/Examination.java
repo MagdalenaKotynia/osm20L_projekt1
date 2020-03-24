@@ -4,15 +4,15 @@ public class Examination {
 
 	/* Attributes */
 	private Date mDate = null;
-	private Boolean mGhbPresence = false;
-	private Double mBloodGlucoseLevel = 21.37;
-	private Double mUrineSugarLevel = 14.04;
+	private boolean mGhbPresence = false;
+	private double mBloodGlucoseLevel = 21.37;
+	private double mUrineSugarLevel = 14.04;
 	
 	
 	/* Constructors */
 	public Examination() {}
 	
-	public Examination(Date d, Boolean g, Double b, Double u) {
+	public Examination(Date d, boolean g, double b, double u) {
 	
 		setExam(d, g, b, u);
 	}
@@ -22,24 +22,24 @@ public class Examination {
 	}
 	
 	/* Setters */ 
-	public void setDate(Date d) {
-		this.mDate=d;
+	public void setDate(Date date) {
+		this.mDate=date;
 	}
-	public void setGhb(Boolean g) {
-		this.mGhbPresence=g;
+	public void setGhb(boolean ghb) {
+		this.mGhbPresence=ghb;
 	}
-	public void setBloodGlucoseLevel(Double b) {
-		this.mBloodGlucoseLevel=b;
+	public void setBloodGlucoseLevel(double bloodGlucose) {
+		this.mBloodGlucoseLevel=bloodGlucose;
 	}
-	public void setUrineSugarLevel(Double u) {
-		this.mUrineSugarLevel=u;
+	public void setUrineSugarLevel(double urineSugar) {
+		this.mUrineSugarLevel=urineSugar;
 	}
 	
-	public void setExam(Date d, Boolean g, Double b, Double u) {
-		this.mDate=d;
-		this.mGhbPresence=g;
-		this.mBloodGlucoseLevel=b;
-		this.mUrineSugarLevel=u;	
+	public void setExam(Date date, boolean ghb, double bloodGlucose, double urineSugar) {
+		this.mDate=date;
+		this.mGhbPresence=ghb;
+		this.mBloodGlucoseLevel=bloodGlucose;
+		this.mUrineSugarLevel=urineSugar;	
 	}
 	
 	/* Getters */
@@ -56,14 +56,18 @@ public class Examination {
 		return(this.mUrineSugarLevel);
 	}
 	
-	/* Comparing method */							// TODO Remember about ArrayList
-	public boolean equals(Examination e) {
-		if(e!=null && this.mDate.equals(e.mDate) && this.mGhbPresence==e.mGhbPresence && this.mBloodGlucoseLevel==e.mBloodGlucoseLevel 
-				&& this.mUrineSugarLevel==e.mUrineSugarLevel) {
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this==obj)
 			return(true);
-		}else {
+		if (obj==null || this.getClass()!=obj.getClass())
 			return(false);
-		}
+		Examination other = (Examination) obj;
+		if (this.mDate.equals(other.mDate) && this.mGhbPresence==other.mGhbPresence &&  this.mBloodGlucoseLevel==other.mBloodGlucoseLevel && this.mUrineSugarLevel==other.mUrineSugarLevel)
+			return(true);
+		return(false);	
 	}
 	
 	// TODO I wonder whether we should write some checkExam method

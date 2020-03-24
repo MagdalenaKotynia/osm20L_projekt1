@@ -1,11 +1,13 @@
 package osmProject1;
 
+
+
 public class Patient {
 
 	/*Attributes of data type class */
-	private String mName = "Jan";
-	private String mSurname = "Kowalski";
-	private String mPESEL = "99033000987";
+	private String mName = null;
+	private String mSurname = null;
+	private String mPESEL = null;
 	private String mInsurance = "NFZ";			// TODO Consider using Enum for Insurance and Gender ---- extra-curricular xD
 	private String mGender = "Mezczyzna";
 	private Examination mExam = null;			
@@ -13,39 +15,39 @@ public class Patient {
 
 	public Patient() {}
 	
-	public Patient(String n, String s, String p, String i, String g, Examination e) {
-		setPatient(n, s, p, i, g, e);
+	public Patient(String name, String surname, String patient, String insurance, String gender, Examination exam) {
+		setPatient(name, surname, patient, insurance, gender, exam);
 	}
 	public Patient(Patient patient) {
 		this(patient.mName, patient.mSurname, patient.mPESEL, patient.mInsurance, patient.mGender, patient.mExam);
 	}
 	
 	/*Setters*/
-	public void setName(String n) {
-		this.mName=n;
+	public void setName(String name) {
+		this.mName=name;
 	}
-	public void setSurname(String s) {
-		this.mSurname=s;
+	public void setSurname(String surname) {
+		this.mSurname=surname;
 	}
-	public void setPESEL(String p) {
-		this.mPESEL=p;
+	public void setPESEL(String pesel) {
+		this.mPESEL=pesel;
 	}
-	public void setInsurance(String i) {
-		this.mInsurance=i;
+	public void setInsurance(String insurance) {
+		this.mInsurance=insurance;
 	}
-	public void setGender(String g) {
-		this.mGender=g;
+	public void setGender(String gender) {
+		this.mGender=gender;
 	}
-	public void setExam(Examination e) {
-		this.mExam=e;
+	public void setExam(Examination exam) {
+		this.mExam=exam;
 	}
-	public void setPatient(String n, String s, String p, String i, String g, Examination e) {
-		this.mName=n;
-		this.mSurname=s;
-		this.mPESEL=p;
-		this.mInsurance=i;
-		this.mGender=g;
-		this.mExam=e;
+	public void setPatient(String name, String surname, String patient, String insurance, String gender, Examination exam) {
+		this.mName=name;
+		this.mSurname=surname;
+		this.mPESEL=patient;
+		this.mInsurance=insurance;
+		this.mGender=gender;
+		this.mExam=exam;
 	}
 	
 	/*Getters*/
@@ -78,6 +80,7 @@ public class Patient {
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (this==obj)
 			return true;

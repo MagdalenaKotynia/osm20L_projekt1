@@ -77,6 +77,5 @@ public class AppView extends JFrame {
 		
 	}
 	
-	// commit
-	
+
 }
