@@ -14,8 +14,9 @@ public class AppView extends JFrame implements ActionListener {
 	public AppView() {
 		
 		this.setFrame();
-		this.setGui();
 		this.setMenu();
+		this.setGui();
+		
 		
 		
 	}
@@ -38,25 +39,58 @@ public class AppView extends JFrame implements ActionListener {
 		mainPanel.setBackground(Color.gray);
 		this.pack();
 		
-		GridLayout mainLayout = new GridLayout(2, 1);
-		mainPanel.setLayout(mainLayout);
+		
+		// setting layout of JPanels
+				GridBagLayout mainLayout = new GridBagLayout();
+				mainPanel.setLayout(mainLayout);
+				GridBagConstraints c = new GridBagConstraints();
 		
 		
+		// Creating JPanel for each part of an app
+				
+		//Patient Panel
 		JPanel patientPanel = new JPanel();
-		mainPanel.add(patientPanel);
-		patientPanel.setBackground(Color.gray);
-		patientPanel.setPreferredSize(new Dimension(300, 400));
+		c.fill=GridBagConstraints.BOTH;
+		c.weightx = 0.5;
+		c.weighty = 0.5;
+		c.gridx = 0;
+		c.gridy = 0;
+		mainPanel.add(patientPanel,c);
+		patientPanel.setPreferredSize(new Dimension(400, 350));
 		patientPanel.setBorder(BorderFactory.createTitledBorder("Dane pacjenta"));
 		
+		// Examination Panel
 		JPanel examPanel = new JPanel();
-		mainPanel.add(examPanel);
-		examPanel.setPreferredSize(new Dimension(300, 500));
+		c.fill=GridBagConstraints.BOTH;
+		c.weightx = 0.5;
+		c.weighty = 0.5;
+		c.gridx=0;
+		c.gridy=1;
+		mainPanel.add(examPanel,c);
+		examPanel.setPreferredSize(new Dimension(00, 250));
 		examPanel.setBorder(BorderFactory.createTitledBorder("Badanie"));
 		
+		// List Panel
 		JPanel listPanel = new JPanel();
-		mainPanel.add(listPanel);
-		listPanel.setPreferredSize(new Dimension(700, 600));
+		c.fill=GridBagConstraints.BOTH;
+		c.weightx = 1;
+		c.weighty = 1;
+		c.gridx=1;
+		c.gridy=0;
+		c.gridheight=2;
+		mainPanel.add(listPanel,c);
+		listPanel.setPreferredSize(new Dimension(600, 200));
 		listPanel.setBorder(BorderFactory.createTitledBorder("Lista pacjentow"));
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
 		
 		
 		
