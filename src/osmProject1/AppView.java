@@ -3,23 +3,30 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
-
 import java.awt.*;
+
+import java.awt.event.*;
+import java.sql.*;
+import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class AppView extends JFrame {
 
 	/* Attributes */
-	private JTextField mNameTxt, mSurnameTxt, mPESELTxt;
-	private JLabel mNameLabel, mSurnameLabel, mPESELLabel, mGenderLabel, mInsuranceLabel;
+	private JTextField mNameTxt, mSurnameTxt, mPESELTxt, mBloodGlucoseLevelTxt, mUrineSugarLevelTxt;
+	private JLabel mNameLabel, mSurnameLabel, mPESELLabel, mGenderLabel, mInsuranceLabel, mDateLabel,  
+	mGhbPresenceLabel, mBloodGlucoseLevelLabel, mUrineSugarLevelLabel;
 	private JButton mSaveButton, mCancellButton;
 	private JRadioButton mMaleButton, mFemaleButton;
 	private JComboBox<String> mInsuranceBox;
 	private Border mPatientBorder;
 	private ButtonGroup mGenderGroup;
 	private Box mGenderBox;
-	
 	private JPanel mMainPanel, mMinorPanel, mSuperPatientPanel, mPatientPanel, mExaminationPanel, mPatientListPanel;
+
+	
 	
 	
 	public AppView() {
@@ -75,10 +82,11 @@ public class AppView extends JFrame {
 		mPatientListPanel.setBorder(new TitledBorder(new LineBorder(Color.black,1),"Lista Pacjentow"));
 		
 		mMinorPanel.add(mSuperPatientPanel);
-		mMinorPanel.add(mPatientListPanel);
+		mMinorPanel.add(mExaminationPanel);
 		mMainPanel.add(mMinorPanel);
-		mMainPanel.add(mExaminationPanel);
 		
+		
+		mMainPanel.add(mPatientListPanel);
 //		GroupLayout layout = new GroupLayout(mPatientPanel);
 //		layout.setAutoCreateGaps(true);
 //		layout.setHorizontalGroup(layout.createSequentialGroup().addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(mNameLabel).addComponent(mSurnameLabel).addComponent(mPESELLabel)).addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(mNameTxt).addComponent(mSurnameTxt).addComponent(mPESELTxt)));
@@ -103,7 +111,6 @@ public class AppView extends JFrame {
 		mNameTxt.setMaximumSize(new Dimension(180,20));
 		mPatientPanel.add(mNameTxt);
 		
-		
 		mPatientPanel = new JPanel();		//po co
 		mPatientPanel.setLayout(new BoxLayout(mPatientPanel,BoxLayout.X_AXIS));
 		mSuperPatientPanel.add(mPatientPanel);
@@ -119,6 +126,7 @@ public class AppView extends JFrame {
 		mSurnameTxt.setMaximumSize(new Dimension(180,20));
 		mPatientPanel.add(mSurnameTxt);
 		
+	
 		mPatientPanel = new JPanel();		//po co
 		mPatientPanel.setLayout(new BoxLayout(mPatientPanel,BoxLayout.X_AXIS));
 		mSuperPatientPanel.add(mPatientPanel);
@@ -151,6 +159,7 @@ public class AppView extends JFrame {
 		mPatientPanel.add(mMaleButton);
 		mPatientPanel.add(mFemaleButton);
 		
+		
 		mPatientPanel = new JPanel();
 		mPatientPanel.setLayout(new BoxLayout(mPatientPanel, BoxLayout.X_AXIS));
 		mSuperPatientPanel.add(mPatientPanel);
@@ -167,11 +176,27 @@ public class AppView extends JFrame {
 		mInsuranceBox.setMaximumSize(new Dimension(180,20));
 		mPatientPanel.add(mInsuranceBox);
 		
+	
+		mPatientPanel = new JPanel();
+		mPatientPanel.setLayout(new BoxLayout(mPatientPanel, BoxLayout.X_AXIS));
+		mSuperPatientPanel.add(mPatientPanel);
 		
 		
+		mPatientPanel.add(mSaveButton);
+		mPatientPanel.add(mCancellButton);
+		mPatientPanel.add(Box.createHorizontalGlue());
 		
-		
-		
+//		UtilDateModel model = new UtilDateModel();
+//		//model.setDate(20,04,2014);
+//		// Need this...
+//		Properties p = new Properties();
+//		p.put("text.today", "Today");
+//		p.put("text.month", "Month");
+//		p.put("text.year", "Year");
+//		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+//		// Don't know about the formatter, but there it is...
+//		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+//		
 		
 		
 		
@@ -233,12 +258,18 @@ public class AppView extends JFrame {
 		this.mGenderGroup = new ButtonGroup();
 		String[] InsuranceTypes = new String[] {"NFZ", "Prywatne", "Brak"};
 		this.mInsuranceBox = new JComboBox<String>(InsuranceTypes);
+		this.mSaveButton = new JButton("Zapisz");
+		this.mCancellButton = new JButton("Anuluj");
+		this.mBloodGlucoseLevelLabel = new JLabel("Stezenie glukozy we krwi:");
+		this.mGhbPresenceLabel = new JLabel("Obecnosc glikowanej hemoglobiny GHB:");
+		this.mUrineSugarLevelLabel = new JLabel("Poziom cukru w moczu");
 		
 		
 		
 		
 		//initialize method 
-		//label dimension
+		//label dimension czy deklarowac
+		
 	}
 	
 //	JComboBox<String> createInsuranceComboBox()
