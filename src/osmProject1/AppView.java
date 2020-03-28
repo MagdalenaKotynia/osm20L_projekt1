@@ -25,7 +25,7 @@ public class AppView extends JFrame {
 	private ButtonGroup mGenderGroup;
 	private Box mGenderBox;
 	private JPanel mMainPanel, mMinorPanel, mSuperPatientPanel, mPatientPanel, mExaminationPanel, mPatientListPanel;
-
+	private JTable mPatientTable;
 	
 	
 	
@@ -186,6 +186,8 @@ public class AppView extends JFrame {
 		mPatientPanel.add(mCancellButton);
 		mPatientPanel.add(Box.createHorizontalGlue());
 		
+		mPatientListPanel.add(mPatientTable);
+		
 //		UtilDateModel model = new UtilDateModel();
 //		//model.setDate(20,04,2014);
 //		// Need this...
@@ -263,6 +265,7 @@ public class AppView extends JFrame {
 		this.mBloodGlucoseLevelLabel = new JLabel("Stezenie glukozy we krwi:");
 		this.mGhbPresenceLabel = new JLabel("Obecnosc glikowanej hemoglobiny GHB:");
 		this.mUrineSugarLevelLabel = new JLabel("Poziom cukru w moczu");
+		this.mPatientTable = new JTable(new PatientTableModel());
 		
 		
 		
