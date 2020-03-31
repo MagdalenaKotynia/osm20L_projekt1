@@ -28,7 +28,7 @@ public class AppView extends JFrame {
 	private JTable mPatientTable;
 	
 	private String[] columnNames; //?? czy aby tak
-	private ArrayList<Patient> mData = null; //czy aby tak
+	private ArrayList<Patient> mData;; //czy aby tak
 	
 	
 	public AppView() {
@@ -188,10 +188,10 @@ public class AppView extends JFrame {
 		mPatientPanel.add(mCancellButton);
 		mPatientPanel.add(Box.createHorizontalGlue());
 		
-		//mPatientListPanel.add(mPatientTable);
-//		mPatientListPanel.setLayout(new BorderLayout());
-//		mPatientListPanel.add(mPatientTable.getTableHeader(), BorderLayout.PAGE_START);
-//		mPatientListPanel.add(mPatientTable, BorderLayout.CENTER);
+		mPatientListPanel.add(mPatientTable);
+		mPatientListPanel.setLayout(new BorderLayout());
+		mPatientListPanel.add(mPatientTable.getTableHeader(), BorderLayout.PAGE_START);
+		mPatientListPanel.add(mPatientTable, BorderLayout.CENTER);
 		
 		
 		
@@ -272,10 +272,10 @@ public class AppView extends JFrame {
 		this.mBloodGlucoseLevelLabel = new JLabel("Stezenie glukozy we krwi:");
 		this.mGhbPresenceLabel = new JLabel("Obecnosc glikowanej hemoglobiny GHB:");
 		this.mUrineSugarLevelLabel = new JLabel("Poziom cukru w moczu");
-		
+		this.mData = new ArrayList();
 		
 		columnNames = new String[] {"Imie i Nazwisko","Plec", "PESEL","Ubezpieczenie","Badanie"} ;//czy tedy droga
-		//this.mPatientTable = new JTable(new PatientTableModel(mData));	//czy tedy droga
+		this.mPatientTable = new JTable(new PatientTableModel(mData));	//czy tedy droga
 		
 		//initialize method 
 		//label dimension czy deklarowac

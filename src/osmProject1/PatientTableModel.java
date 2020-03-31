@@ -64,7 +64,10 @@ public class PatientTableModel extends AbstractTableModel {
     private void setColumnNames()
     {
     	this.columnNames.add("Imie i Nazwisko");
+    	this.columnNames.add("Plec");
     	this.columnNames.add("PESEL");
+    	this.columnNames.add("Ubezpieczenie");
+    	this.columnNames.add("Badanie");
     }
     
     private void setData(ArrayList<Patient> data)
