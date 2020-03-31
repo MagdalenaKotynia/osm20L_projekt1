@@ -1,31 +1,75 @@
 package osmProject1;
 
+import java.util.ArrayList;
+
+import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
+
 
 public class PatientTableModel extends AbstractTableModel {
 	
-	private String[] columnNames = new String[] {"Imie i Nazwisko","Plec", "PESEL","Ubezpieczenie","Badanie"} ;
-	private Object[][] data;
+	private final ArrayList<String> columnNames;
+	
+	//to chyba nie tak
+	private ArrayList<Patient> data;
+	
+	public PatientTableModel()
+	{
+		columnNames = new ArrayList<>();
+		this.setColumnNames();
+	
+
+	}
+	
+	
+	public PatientTableModel( ArrayList<Patient> data)
+	{
+		columnNames = new ArrayList<>();
+		this.setColumnNames();
+		this.data = data;
+		
+	}
 
 	@Override
 	public int getRowCount() {
-		// TODO Auto-generated method stub
-		return data.length;
+		
+		return data.size();
 	}
 
 	@Override
-	public int getColumnCount() {
-		// TODO Auto-generated method stub
-		return columnNames.length;
+	public int getColumnCount() 
+	{
+
+		return columnNames.size();
 	}
+	
 	public String getColumnName(int col)
 	{
-		return columnNames[col];
+		return columnNames.get(col);
 	}
+	
+	
 	@Override
 	public Object getValueAt(int row, int col) {
-		// TODO Auto-generated method stub
-		return data[row][col];
+
+		return data.get(row).getPatientAtributes().get(col);
 	}
+	
+    public void setValueAt(Object value, int row, int col)
+    {
+        this.data.get(row).getPatientAtributes().set(col, value);//getArrayList
+        fireTableCellUpdated(row,col);
+    }
+    
+    private void setColumnNames()
+    {
+    	this.columnNames.add("Imie i Nazwisko");
+    	this.columnNames.add("PESEL");
+    }
+    
+    private void setData(ArrayList<Patient> data)
+    {
+    	this.data = data;
+    }
 
 }

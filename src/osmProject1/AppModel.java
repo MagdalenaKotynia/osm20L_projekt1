@@ -43,6 +43,11 @@ public class AppModel {
 		this.mPatient.setPESEL(pesel);
 	}
 	
+	public ArrayList getPatientList()
+	{
+		return(this.mList);
+	}
+	
 	
 	
 	

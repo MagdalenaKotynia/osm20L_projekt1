@@ -1,6 +1,6 @@
 package osmProject1;
 
-
+import java.util.ArrayList;
 
 public class Patient {
 
@@ -10,7 +10,8 @@ public class Patient {
 	private String mPESEL = null;
 	private String mInsurance = "NFZ";			// TODO Consider using Enum for Insurance and Gender ---- extra-curricular xD
 	private String mGender = "Mezczyzna";
-	private Examination mExam = null;			
+	private Examination mExam = null;	
+	private ArrayList mPatientAtributes = null;
 	
 
 	public Patient() {}
@@ -49,7 +50,15 @@ public class Patient {
 		this.mGender=gender;
 		this.mExam=exam;
 	}
-	
+	public void setPatientAtributesList(Patient patient) //add get, czy po prostu atrybuty??
+	{
+		this.mPatientAtributes.add(this.getName());
+		this.mPatientAtributes.add(this.getSurname());
+		this.mPatientAtributes.add(this.getGender());
+		this.mPatientAtributes.add(this.getPESEL());
+		this.mPatientAtributes.add(this.getInsurance());
+		this.mPatientAtributes.add(this.getExam());
+	}
 	/*Getters*/
 	public String getName() {
 		return(this.mName);
@@ -102,7 +111,12 @@ public class Patient {
 	this.mInsurance + " Plec: " + this.mGender);
 	}
 	
+	public ArrayList getPatientAtributes()
+	{
+		return(this.mPatientAtributes);
+	}
 	
+	//funkcja ktora bedzie zwracala ArrayList atrybutow
 	
 	}
 
