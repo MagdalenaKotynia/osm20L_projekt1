@@ -1,9 +1,16 @@
 package osmProject1;
 import javax.swing.*;
+<<<<<<< src/osmProject1/AppView.java
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+=======
+
+>>>>>>> src/osmProject1/AppView.java
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+import java.awt.GridLayout;
 
 import java.awt.event.*;
 import java.sql.*;
@@ -12,7 +19,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 
-public class AppView extends JFrame {
+public class AppView extends JFrame implements ActionListener {
 
 	/* Attributes */
 	private JTextField mNameTxt, mSurnameTxt, mPESELTxt, mBloodGlucoseLevelTxt, mUrineSugarLevelTxt;
@@ -31,31 +38,107 @@ public class AppView extends JFrame {
 	private ArrayList<Patient> mData;; //czy aby tak
 	
 	
+	// constructor
 	public AppView() {
 		this.initializeElements();
 		this.setFrame();
-		this.setGui();
 		this.setMenu();
+<<<<<<< src/osmProject1/AppView.java
 		
 		/*this.setPatientPanel();
 		
 		
 		
+=======
+		this.setGui();
+		
+		
+		
+	}
+	
+	/*			METHOD FOR WINDOW CLOSING  not implemented yet but it will be used */
+	public void actionPerformed(ActionEvent evt) {
+		if (evt.getActionCommand().equals("Zamknij")) {
+			this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+		}
+	}
+	
+	
+	
+	
+	private void setGui() {
+		
+		// Main Panel for placing other panels
+		JPanel mainPanel = new JPanel();
+		this.getContentPane().add(mainPanel);
+		mainPanel.setPreferredSize(new Dimension(1000, 600));
+		mainPanel.setBackground(Color.gray);
+		this.pack();
+>>>>>>> src/osmProject1/AppView.java
 		
 		/*
 		
-		JMenuBar menu = new JMenuBar();
-		mainPanel.add(BorderLayout.NORTH, menu);
+		// setting layout of JPanels
+				GridBagLayout mainLayout = new GridBagLayout();
+				mainPanel.setLayout(mainLayout);
+				GridBagConstraints c = new GridBagConstraints();
 		
 		
+		// Creating JPanel for each part of an app
+				
+		//Patient Panel
 		JPanel patientPanel = new JPanel();
-		mainPanel.add(BorderLayout.WEST, patientPanel);
-		patientPanel.setBackground(Color.red);
-		patientPanel.setPreferredSize(new Dimension(300, 400));
+		c.fill=GridBagConstraints.BOTH;
+		c.weightx = 0.5;
+		c.weighty = 0.5;
+		c.gridx = 0;
+		c.gridy = 0;
+		mainPanel.add(patientPanel,c);
+		patientPanel.setBorder(BorderFactory.createTitledBorder("Dane pacjenta"));
+		
+		// Examination Panel
+		JPanel examPanel = new JPanel();
+		c.fill=GridBagConstraints.BOTH;
+		c.weightx = 0.5;
+		c.weighty = 0.5;
+		c.gridx=0;
+		c.gridy=1;
+		mainPanel.add(examPanel,c);
+		examPanel.setBorder(BorderFactory.createTitledBorder("Badanie"));
+		
+		// List Panel
+		JPanel listPanel = new JPanel();
+		c.fill=GridBagConstraints.BOTH;
+		c.weightx = 1;
+		c.weighty = 1;
+		c.gridx=1;
+		c.gridy=0;
+		c.gridheight=2;
+		mainPanel.add(listPanel,c);
+		listPanel.setBorder(BorderFactory.createTitledBorder("Lista pacjentow"));
+		
+		// Setting layout for patient panel
+		GroupLayout patientLayout = new GroupLayout(patientPanel);
+		patientPanel.setLayout(patientLayout);
+		
+		// patient panel components
+		JLabel name = new JLabel("Imie:");
+		JTextField nameTextField = new JTextField();
+		JLabel surname = new JLabel("Nazwisko:");
+		JTextField surnameTextField = new JTextField();
+		JLabel pesel = new JLabel("PESEL:");
+		JTextField peselTextField = new JTextField();
+		JLabel gender = new JLabel("Plec:");
+		JLabel insurance =  new JLabel("Ubezpieczenie:");
 		
 		
-		patientPanel.setBorder(BorderFactory.createTitledBorder("Pacjent"));
+		patientLayout.setAutoCreateGaps(true);
+		// not working
+		//patientLayout.setHorizontalGroup(patientLayout.createSequentialGroup().addGroup(patientLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(name).addComponent(surname).addComponent(pesel).addComponent(gender).addComponent(gender)));
 		
+		
+		
+<<<<<<< src/osmProject1/AppView.java
 		*/
 		
 	}
@@ -209,6 +292,12 @@ public class AppView extends JFrame {
 		
 		
 		
+=======
+		
+		
+
+		
+>>>>>>> src/osmProject1/AppView.java
 		
 		
 	}
@@ -218,7 +307,11 @@ public class AppView extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(800, 600);
 		this.setVisible(true);
+<<<<<<< src/osmProject1/AppView.java
 		this.setTitle("Rejestracja wynikow badania");
+=======
+		this.setTitle("Rejestracja wynikow badan");
+>>>>>>> src/osmProject1/AppView.java
 	}
 	
 	private void setMenu() {
@@ -231,10 +324,11 @@ public class AppView extends JFrame {
 		menuBar.add(menu);
 		
 		JMenuItem menuItem = new JMenuItem("Zamknij");
-		// menuItem.addActionListener(this);				//add thread handling
+		//menuItem.addActionListener(this);				//add thread handling   need AppControler for proper work
 		menu.add(menuItem);
 	}
 	
+<<<<<<< src/osmProject1/AppView.java
 	private void setPatientPanel(JPanel patientPanel) {
 		patientPanel = new JPanel();
 		patientPanel.setBorder(new TitledBorder(new LineBorder(Color.black, 5),
@@ -295,5 +389,8 @@ public class AppView extends JFrame {
 //		
 //	}
 	
+=======
+
+>>>>>>> src/osmProject1/AppView.java
 
 }
