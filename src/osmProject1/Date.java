@@ -65,8 +65,7 @@ public class Date {
 		}
 	}
 	
-	/* Method for verifying validity of given date*/
-	// TODO Verify whether .intValue is necessary 
+	/* Method for verifying validity of given date*/ 
 	public static boolean checkDate(Integer day, Integer month, Integer year) {
 		if(year.intValue()==0 || month.intValue()<1 || month.intValue()>12 || day.intValue()<1 || day.intValue()>Date.NumOfDays[month-1]) {
 			return(false);
