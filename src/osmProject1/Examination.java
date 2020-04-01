@@ -1,8 +1,10 @@
 package osmProject1;
+import java.util.Date;
 
 public class Examination {
 
 	/* Attributes */
+	
 	private Date mDate = null;
 	private boolean mGhbPresence = false;
 	private double mBloodGlucoseLevel = 21.37;

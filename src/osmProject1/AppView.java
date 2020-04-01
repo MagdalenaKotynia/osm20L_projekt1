@@ -1,6 +1,5 @@
 package osmProject1;
 import javax.swing.*;
-
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
@@ -21,7 +20,7 @@ public class AppView extends JFrame implements ActionListener {
 	private JTextField mNameTxt, mSurnameTxt, mPESELTxt, mBloodGlucoseLevelTxt, mUrineSugarLevelTxt;
 	private JLabel mNameLabel, mSurnameLabel, mPESELLabel, mGenderLabel, mInsuranceLabel, mDateLabel,  
 	mGhbPresenceLabel, mBloodGlucoseLevelLabel, mUrineSugarLevelLabel;
-	private JButton mSaveButton, mCancellButton, mSaveExamButton, mCancelExamButton;
+	private JButton mSaveButton, mCancellButton, mSaveExamButton, mCancelExamButton, mAddButton, mDeleteButton;
 	private JRadioButton mMaleButton, mFemaleButton;
 	private JComboBox<String> mInsuranceBox;
 	//private Border mPatientBorder;
@@ -162,18 +161,26 @@ public class AppView extends JFrame implements ActionListener {
 		mPatientPanel.add(mCancellButton);
 		mPatientPanel.add(Box.createHorizontalGlue());
 		
+		
+		
+		// patientListPanel
+		
+	
+		
 		mPatientListPanel.add(mPatientTable);
 		mPatientListPanel.setLayout(new BorderLayout());
 		mPatientListPanel.add(mPatientTable.getTableHeader(), BorderLayout.PAGE_START);
 		mPatientListPanel.add(mPatientTable, BorderLayout.CENTER);
+		mPatientPanel.add(mSaveButton, BorderLayout.SOUTH);
 		
 		
-		// examPanel
+		//========================================================= examPanel
 		GridBagLayout examLayout = new GridBagLayout();
 		mExaminationPanel.setLayout(examLayout);
 		GridBagConstraints constraints = new GridBagConstraints();
 		
 		
+		// Date
 		constraints.fill=GridBagConstraints.BOTH;
 		constraints.insets= new Insets(10,0,0,10);
 		constraints.weightx=0.1;
@@ -188,6 +195,7 @@ public class AppView extends JFrame implements ActionListener {
 		constraints.gridy=0;
 		mExaminationPanel.add(mDateCalendar, constraints);
 		
+		// Blood Glucose level
 		constraints.gridwidth = 2;
 		constraints.gridx=0;
 		constraints.gridy=1;
@@ -198,6 +206,7 @@ public class AppView extends JFrame implements ActionListener {
 		constraints.gridy=1;
 		mExaminationPanel.add(mBloodGlucoseLevelTxt, constraints);
 		
+		// GHB
 		constraints.gridwidth = 2;
 		constraints.gridx=0;
 		constraints.gridy=2;
@@ -209,6 +218,7 @@ public class AppView extends JFrame implements ActionListener {
 		constraints.gridy=2;
 		mExaminationPanel.add(mGhbCheckBox, constraints);
 		
+		// Urine sugar level
 		constraints.gridwidth = 2;
 		constraints.gridx=0;
 		constraints.gridy=3;
@@ -219,14 +229,15 @@ public class AppView extends JFrame implements ActionListener {
 		constraints.gridy=3;
 		mExaminationPanel.add(mUrineSugarLevelTxt, constraints);
 		
-		constraints.fill=GridBagConstraints.NONE;
+		//Buttons
+		constraints.fill=GridBagConstraints.BOTH;
 		constraints.anchor=GridBagConstraints.LAST_LINE_START;
-		constraints.insets= new Insets(5,0,5,5);
+		constraints.insets= new Insets(20,0,5,20);
 		constraints.gridx=0;
 		constraints.gridy=4;
 		mExaminationPanel.add(mSaveExamButton, constraints);
 		
-		constraints.insets= new Insets(5,5,5,5);
+		constraints.insets= new Insets(20,0,5,20);
 		constraints.gridx=1;
 		constraints.gridy=4;
 		mExaminationPanel.add(mCancelExamButton, constraints);
@@ -286,6 +297,9 @@ public class AppView extends JFrame implements ActionListener {
 		this.mData = new ArrayList<>(); // added <>
 		columnNames = new String[] {"Imie i Nazwisko","Plec", "PESEL","Ubezpieczenie","Badanie"} ;//czy tedy droga
 		this.mPatientTable = new JTable(new PatientTableModel(mData));	//czy tedy droga
+		
+		this.mAddButton = new JButton("Dodaj");
+		this.mDeleteButton = new JButton("Usun");
 		
 		
 		// mExaminationPanel components 
