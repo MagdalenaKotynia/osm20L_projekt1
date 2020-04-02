@@ -1,7 +1,5 @@
 package osmProject1;
 import javax.swing.*;
-import javax.swing.border.LineBorder;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.*;
@@ -21,7 +19,7 @@ public class AppView extends JFrame implements ActionListener {
 	//private Border mPatientBorder;
 	private ButtonGroup mGenderGroup;
 	//private Box mGenderBox;
-	private JPanel mMainPanel, mPatientPanel, mExaminationPanel, mPatientListPanel;
+	private JPanel mMainPanel, mPatientPanel, mExaminationPanel, mPatientListPanel, patientList;;
 	//private JTable mPatientTable;
 	private JCheckBox mGhbCheckBox;
 	private JDateChooser mDateCalendar;
@@ -33,8 +31,8 @@ public class AppView extends JFrame implements ActionListener {
 	
 	
 	
-	private String[] columnNames; //?? czy aby tak
-	private ArrayList<Patient> mData; //czy aby tak
+	//private String[] columnNames; //?? czy aby tak
+	//private ArrayList<Patient> mData; //czy aby tak
 	
 	
 	// constructor
@@ -255,7 +253,7 @@ public class AppView extends JFrame implements ActionListener {
 		listConstraints.insets = new Insets(5,5,5,5); 
 		
 		
-		JPanel patientList = new PatientTable();
+		
 		
 		mPatientListPanel.add(patientList, listConstraints);
 		
@@ -273,9 +271,6 @@ public class AppView extends JFrame implements ActionListener {
 		listConstraints.insets = new Insets(5,5,5,300);
 		mPatientListPanel.add(mDeleteButton, listConstraints);
 		// REALLY USEFUL FUNCTION BLESSINGS BE UPON YOU MR FROM STACKOVERFLOW
-		
-		
-		
 		
 		mMainPanel.revalidate();
 		mMainPanel.repaint();
@@ -331,14 +326,14 @@ public class AppView extends JFrame implements ActionListener {
 		this.mSaveButton = new JButton("Zapisz");
 		this.mCancellButton = new JButton("Anuluj");
 
-	// Table 
-		this.mData = new ArrayList<>(); // added <>
-		columnNames = new String[] {"Imie i Nazwisko","Plec", "PESEL","Ubezpieczenie","Badanie"} ;//czy tedy droga
+	// Table components
+	//	this.mData = new ArrayList<>(); // added <>
+	//	columnNames = new String[] {"Imie i Nazwisko","Plec", "PESEL","Ubezpieczenie","Badanie"} ;//czy tedy droga
 	//	this.mPatientTable = new JTable(new PatientTableModel(mData));	//czy tedy droga
 		
 		this.mAddButton = new JButton("Dodaj");
 		this.mDeleteButton = new JButton("Usun");
-		
+		this.patientList = new PatientTable();
 		
 		// mExaminationPanel components 
 		//Labels
@@ -363,7 +358,7 @@ public class AppView extends JFrame implements ActionListener {
 	// ========================================================================================= trash code for possible reuse
 	
 	
-	/*			METHOD FOR WINDOW CLOSING  not implemented yet but it will be used */
+	
 	public void actionPerformed(ActionEvent evt) {
 		if (evt.getActionCommand().equals("Zamknij")) {
 			this.dispose();
