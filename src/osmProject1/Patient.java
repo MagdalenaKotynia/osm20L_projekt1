@@ -8,10 +8,10 @@ public class Patient {
 	private String mName = null;
 	private String mSurname = null;
 	private String mPESEL = null;
-	private String mInsurance = "NFZ";			// TODO Consider using Enum for Insurance and Gender ---- extra-curricular xD
+	private String mInsurance = "NFZ";			
 	private String mGender = "Mezczyzna";
 	private Examination mExam = null;	
-	private ArrayList mPatientAtributes = null;
+	private ArrayList mPatientAtributes;
 	
 
 	public Patient() {}
@@ -50,6 +50,7 @@ public class Patient {
 		this.mGender=gender;
 		this.mExam=exam;
 	}
+	
 	public void setPatientAtributesList(Patient patient) //add get, czy po prostu atrybuty??
 	{
 		this.mPatientAtributes.add(this.getName());
@@ -59,6 +60,7 @@ public class Patient {
 		this.mPatientAtributes.add(this.getInsurance());
 		this.mPatientAtributes.add(this.getExam());
 	}
+	
 	/*Getters*/
 	public String getName() {
 		return(this.mName);
@@ -110,6 +112,7 @@ public class Patient {
 		return("Imie: " + this.mName +" Nazwisko: " + this.mSurname + " PESEL: " + this.mPESEL + " Ubezpieczenie: " + 
 	this.mInsurance + " Plec: " + this.mGender);
 	}
+	
 	
 	public ArrayList getPatientAtributes()
 	{

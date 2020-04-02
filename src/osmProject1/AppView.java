@@ -1,18 +1,13 @@
 package osmProject1;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.WindowEvent;
-import java.awt.event.*;
-import java.sql.*;
 import java.util.*;
-import java.util.Calendar;
-import java.util.Date;
-import com.toedter.*;
 import com.toedter.calendar.*;
+import java.awt.event.ActionListener;
+
 
 public class AppView extends JFrame implements ActionListener {
 
@@ -27,12 +22,19 @@ public class AppView extends JFrame implements ActionListener {
 	private ButtonGroup mGenderGroup;
 	//private Box mGenderBox;
 	private JPanel mMainPanel, mMinorPanel, mSuperPatientPanel, mPatientPanel, mExaminationPanel, mPatientListPanel;
-	private JTable mPatientTable;
+	//private JTable mPatientTable;
 	private JCheckBox mGhbCheckBox;
 	private JDateChooser mDateCalendar;
 	
+	
+	
+	
+	
+	
+	
+	
 	private String[] columnNames; //?? czy aby tak
-	private ArrayList<Patient> mData;; //czy aby tak
+	private ArrayList<Patient> mData; //czy aby tak
 	
 	
 	// constructor
@@ -69,7 +71,14 @@ public class AppView extends JFrame implements ActionListener {
 		mMainPanel.add(mMinorPanel);
 		
 		
+
+		
+		
+		
+		
 		mMainPanel.add(mPatientListPanel);
+		
+		//////////////////////////////////////////////////////////
 
 		// major patientPanel settings
 		mSuperPatientPanel.setLayout(new BoxLayout(mSuperPatientPanel,BoxLayout.Y_AXIS));
@@ -167,11 +176,11 @@ public class AppView extends JFrame implements ActionListener {
 		
 	
 		
-		mPatientListPanel.add(mPatientTable);
-		mPatientListPanel.setLayout(new BorderLayout());
-		mPatientListPanel.add(mPatientTable.getTableHeader(), BorderLayout.PAGE_START);
-		mPatientListPanel.add(mPatientTable, BorderLayout.CENTER);
-		mPatientPanel.add(mSaveButton, BorderLayout.SOUTH);
+	//	mPatientListPanel.add(mPatientTable);
+	//	mPatientListPanel.setLayout(new BorderLayout());
+	//	mPatientListPanel.add(mPatientTable.getTableHeader(), BorderLayout.PAGE_START);
+	//	mPatientListPanel.add(mPatientTable, BorderLayout.CENTER);
+	//	mPatientPanel.add(mSaveButton, BorderLayout.SOUTH);
 		
 		
 		//========================================================= examPanel
@@ -242,6 +251,18 @@ public class AppView extends JFrame implements ActionListener {
 		constraints.gridy=4;
 		mExaminationPanel.add(mCancelExamButton, constraints);
 		
+		//++++++++++++++++++++++++++++++++++++++++++++++++++ Table
+		
+		JPanel patientList = new PatientTable();
+		patientList.setOpaque(true);
+		mPatientListPanel.add(patientList);
+		patientList.setVisible(true);
+		
+		
+		// REALLY USEFUL FUNCTION BLESSINGS BE UPON YOU MR FROM STACKOVERFLOW
+		mMainPanel.revalidate();
+		mMainPanel.repaint();
+		
 	}
 	
 	private void setFrame() {
@@ -261,7 +282,7 @@ public class AppView extends JFrame implements ActionListener {
 		menuBar.add(menu);
 		
 		JMenuItem menuItem = new JMenuItem("Zamknij");
-		//menuItem.addActionListener(this);				//add thread handling   need AppControler for proper work
+		menuItem.addActionListener(this);				//add thread handling   need AppControler for proper work
 		menu.add(menuItem);
 	}
 	
@@ -296,7 +317,7 @@ public class AppView extends JFrame implements ActionListener {
 	// Table 
 		this.mData = new ArrayList<>(); // added <>
 		columnNames = new String[] {"Imie i Nazwisko","Plec", "PESEL","Ubezpieczenie","Badanie"} ;//czy tedy droga
-		this.mPatientTable = new JTable(new PatientTableModel(mData));	//czy tedy droga
+	//	this.mPatientTable = new JTable(new PatientTableModel(mData));	//czy tedy droga
 		
 		this.mAddButton = new JButton("Dodaj");
 		this.mDeleteButton = new JButton("Usun");
@@ -328,7 +349,7 @@ public class AppView extends JFrame implements ActionListener {
 	/*			METHOD FOR WINDOW CLOSING  not implemented yet but it will be used */
 	public void actionPerformed(ActionEvent evt) {
 		if (evt.getActionCommand().equals("Zamknij")) {
-			this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+			this.dispose();
 		}
 	}
 	
