@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
 import javax.swing.*;
 
 public class PatientTable extends JPanel implements ActionListener {
@@ -32,6 +31,8 @@ public class PatientTable extends JPanel implements ActionListener {
 		this.add(scrollPane, BorderLayout.CENTER);
 		this.setVisible(true);
 	}
+	
+	
 	
 	
 	

@@ -59,4 +59,19 @@ public class myTable extends AbstractTableModel{
 		}
 	}
 
+	public boolean isCellEditable(int rwo, int col) {
+		
+		if (col<2) {
+			return false;
+		}else {
+			return true;
+		}
+		
+	}
+	public void setValueAt(Patient data, int row, int col) {
+		patient.set(row, data);
+		fireTableCellUpdated(row, col);
+	}
+	
+	
 }

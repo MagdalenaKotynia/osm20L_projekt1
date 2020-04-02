@@ -3,18 +3,37 @@ import java.util.*;
 
 public class AppModel {
 
-	private ArrayList<Patient> mList = new ArrayList<>();
-	private Patient mPatient = null;
-
-
+	private ArrayList<Patient> mList;
 	
 	public AppModel()
 	{
-		
+		mList = new ArrayList<Patient>();
 	}
 	
+	public void add(Patient patient) {
+		mList.add(patient);
+	}
 	
-	public void createPatient(String name, String surname, String pesel, String insurance, String gender, Examination exam )
+	public ArrayList<Patient> getPatients(){
+		return mList;
+	}
+	
+	public Patient getPatient(int index) {
+		
+		return mList.get(index);
+	}
+	
+
+	
+	public void remove(Patient patient) {
+		mList.remove(patient);
+	}
+	
+
+
+}
+
+/*	public void createPatient(String name, String surname, String pesel, String insurance, String gender, Examination exam )
 	{
 		
 		
@@ -23,39 +42,9 @@ public class AppModel {
 	}
 	
 	
-	
-	public void addPatient(Patient patient)
-	{
-		this.mList.add(patient);
-	}
-	
-	
-	public void removePatient(Patient patient)
-	{
-		
-		this.mList.remove(patient);
-	}
-	
-	/*czy dodawac podobne do tej niej metody, czy moge siegac po nie z Patient?*/
-	
-	public void setPESEL(String pesel)
-	{
-		this.mPatient.setPESEL(pesel);
-	}
-	
-	public ArrayList getPatientList()
-	{
-		return(this.mList);
-	}
-	
-	
-	
-	
-	
-	/*czy dodawac metody getName, getSurname itp itd
-	 * czy definiowac wszystkie atrybuty pacjenta i badania znowu?
-	 * czy do metody createpatient potem przekazywac dane z getPesel itp.?
 	 */
-
-
-}
+	
+	
+	
+	
+	

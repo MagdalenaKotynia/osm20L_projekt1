@@ -1,7 +1,5 @@
 package osmProject1;
 
-import java.util.ArrayList;
-
 public class Patient {
 
 	/*Attributes of data type class */
@@ -11,7 +9,7 @@ public class Patient {
 	private String mInsurance = "NFZ";			
 	private String mGender = "Mezczyzna";
 	private Examination mExam = null;	
-	private ArrayList mPatientAtributes;
+	
 	
 
 	public Patient() {}
@@ -51,15 +49,7 @@ public class Patient {
 		this.mExam=exam;
 	}
 	
-	public void setPatientAtributesList(Patient patient) //add get, czy po prostu atrybuty??
-	{
-		this.mPatientAtributes.add(this.getName());
-		this.mPatientAtributes.add(this.getSurname());
-		this.mPatientAtributes.add(this.getGender());
-		this.mPatientAtributes.add(this.getPESEL());
-		this.mPatientAtributes.add(this.getInsurance());
-		this.mPatientAtributes.add(this.getExam());
-	}
+
 	
 	/*Getters*/
 	public String getName() {
@@ -112,14 +102,11 @@ public class Patient {
 		return("Imie: " + this.mName +" Nazwisko: " + this.mSurname + " PESEL: " + this.mPESEL + " Ubezpieczenie: " + 
 	this.mInsurance + " Plec: " + this.mGender);
 	}
+
 	
 	
-	public ArrayList getPatientAtributes()
-	{
-		return(this.mPatientAtributes);
-	}
 	
-	//funkcja ktora bedzie zwracala ArrayList atrybutow
+
 	
 	}
 
