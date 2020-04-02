@@ -21,7 +21,7 @@ public class AppView extends JFrame implements ActionListener {
 	//private Border mPatientBorder;
 	private ButtonGroup mGenderGroup;
 	//private Box mGenderBox;
-	private JPanel mMainPanel, mMinorPanel, mSuperPatientPanel, mPatientPanel, mExaminationPanel, mPatientListPanel;
+	private JPanel mMainPanel, mPatientPanel, mExaminationPanel, mPatientListPanel;
 	//private JTable mPatientTable;
 	private JCheckBox mGhbCheckBox;
 	private JDateChooser mDateCalendar;
@@ -51,137 +51,125 @@ public class AppView extends JFrame implements ActionListener {
 		
 	// mainPanel
 		this.getContentPane().add(mMainPanel);
-		mMainPanel.setPreferredSize(new Dimension(800, 450));
+		mMainPanel.setPreferredSize(new Dimension(900, 500));
 		mMainPanel.setBackground(Color.gray);
 		this.pack();
 		
-		// mainPanel layout
-		mMainPanel.setLayout(new GridLayout(1,2));	
-		mMinorPanel.setLayout(new GridLayout(2,1));
-		
-		// setting border text for minor panels
-		mSuperPatientPanel.setBorder(new TitledBorder(new LineBorder(Color.black, 1),
-		        "Pacjent"));	
-		mExaminationPanel.setBorder(new TitledBorder(new LineBorder(Color.black,1),"Badanie"));
-		mPatientListPanel.setBorder(new TitledBorder(new LineBorder(Color.black,1),"Lista Pacjentow"));
-		
-		// adding minor Panels to mainPanel
-		mMinorPanel.add(mSuperPatientPanel);
-		mMinorPanel.add(mExaminationPanel);
-		mMainPanel.add(mMinorPanel);
 		
 		
-
+		// setting layout of JPanels
+				GridBagLayout mainLayout = new GridBagLayout();
+				mMainPanel.setLayout(mainLayout);
+				GridBagConstraints c = new GridBagConstraints();
 		
 		
+		//========================================================= Creating JPanel for each part of an app
+				
+		//Patient Panel
+		c.fill=GridBagConstraints.BOTH;
+		c.weightx = 0.5;
+		c.weighty = 0.5;
+		c.gridx = 0;
+		c.gridy = 0;
+		mMainPanel.add(mPatientPanel,c);
+		mPatientPanel.setBorder(BorderFactory.createTitledBorder("Dane pacjenta"));
+		
+		// Examination Panel
+		c.fill=GridBagConstraints.BOTH;
+		c.weightx = 0.5;
+		c.weighty = 0.5;
+		c.gridx=0;
+		c.gridy=1;
+		mMainPanel.add(mExaminationPanel,c);
+		mExaminationPanel.setBorder(BorderFactory.createTitledBorder("Badanie"));
+		
+		// List Panel
+		c.fill=GridBagConstraints.BOTH;
+		c.weightx = 1;
+		c.weighty = 1;
+		c.gridx=1;
+		c.gridy=0;
+		c.gridheight=2;
+		mMainPanel.add(mPatientListPanel,c);
+		mPatientListPanel.setBorder(BorderFactory.createTitledBorder("Lista pacjentow"));
 		
 		
-		mMainPanel.add(mPatientListPanel);
+		//========================================================== patientPanel
+		GridBagLayout patientLayout =new GridBagLayout();
+		mPatientPanel.setLayout(patientLayout);
+		GridBagConstraints patientConstraints = new GridBagConstraints();
 		
-		//////////////////////////////////////////////////////////
-
-		// major patientPanel settings
-		mSuperPatientPanel.setLayout(new BoxLayout(mSuperPatientPanel,BoxLayout.Y_AXIS));
-		mPatientPanel.setLayout(new BoxLayout(mPatientPanel,BoxLayout.X_AXIS));
-		mSuperPatientPanel.add(mPatientPanel);
-		mNameLabel.setPreferredSize(new Dimension(90,25));
-		mNameLabel.setMinimumSize(new Dimension(90,25));
-		mNameLabel.setMaximumSize(new Dimension(90,25));
-		mPatientPanel.add(mNameLabel);
-		// minor patientPanel settings
-		mPatientPanel.add(Box.createHorizontalGlue());
-		mNameTxt.setPreferredSize(new Dimension(180,20));
-		mNameTxt.setMinimumSize(new Dimension(180,20));
-		mNameTxt.setMaximumSize(new Dimension(180,20));
-		mPatientPanel.add(mNameTxt);
+		// Name
+		patientConstraints.fill=GridBagConstraints.BOTH;
+		patientConstraints.insets = new Insets(10, 0, 10, 10);
+		patientConstraints.gridx=0;
+		patientConstraints.gridy=0;
+		patientConstraints.weightx=0.1;
+		patientConstraints.weighty=0.1;
+		patientConstraints.gridwidth=2;
+		mPatientPanel.add(mNameLabel, patientConstraints);
 		
-		mPatientPanel = new JPanel();		//po co
-		mPatientPanel.setLayout(new BoxLayout(mPatientPanel,BoxLayout.X_AXIS));
-		mSuperPatientPanel.add(mPatientPanel);
+		patientConstraints.gridx=3;
+		patientConstraints.gridy=0;
+		patientConstraints.gridwidth=2;
+		mPatientPanel.add(mNameTxt, patientConstraints);
 		
-		mSurnameLabel.setPreferredSize(new Dimension(90,25));
-		mSurnameLabel.setMinimumSize(new Dimension(90,25));
-		mSurnameLabel.setMaximumSize(new Dimension(90,25));
-		mPatientPanel.add(mSurnameLabel);
-		
-		mPatientPanel.add(Box.createHorizontalGlue());
-		mSurnameTxt.setPreferredSize(new Dimension(180,20));
-		mSurnameTxt.setMinimumSize(new Dimension(180,20));
-		mSurnameTxt.setMaximumSize(new Dimension(180,20));
-		mPatientPanel.add(mSurnameTxt);
-		
+		// Surname
+		patientConstraints.gridx=0;
+		patientConstraints.gridy=1;
+		patientConstraints.gridwidth=2;
+		mPatientPanel.add(mSurnameLabel, patientConstraints);
 	
-		mPatientPanel = new JPanel();		//po co
-		mPatientPanel.setLayout(new BoxLayout(mPatientPanel,BoxLayout.X_AXIS));
-		mSuperPatientPanel.add(mPatientPanel);
+		patientConstraints.gridx=3;
+		patientConstraints.gridy=1;
+		patientConstraints.gridwidth=2;
+		mPatientPanel.add(mSurnameTxt, patientConstraints);
 		
-		mPESELLabel.setPreferredSize(new Dimension(90,25));
-		mPESELLabel.setMinimumSize(new Dimension(90,25));
-		mPESELLabel.setMaximumSize(new Dimension(90,25));
-		mPatientPanel.add(mPESELLabel);
+		// PESEL
+		patientConstraints.gridx=0;
+		patientConstraints.gridy=2;
+		patientConstraints.gridwidth=2;
+		mPatientPanel.add(mPESELLabel, patientConstraints);
 		
-		mPatientPanel.add(Box.createHorizontalGlue());
-		mPESELTxt.setPreferredSize(new Dimension(180,20));
-		mPESELTxt.setMinimumSize(new Dimension(180,20));
-		mPESELTxt.setMaximumSize(new Dimension(180,20));
-		mPatientPanel.add(mPESELTxt);
+		patientConstraints.gridx=3;
+		patientConstraints.gridy=2;
+		mPatientPanel.add(mPESELTxt, patientConstraints);
 		
-
+		// Gender
+		patientConstraints.gridx=0;
+		patientConstraints.gridy=3;
+		mPatientPanel.add(mGenderLabel, patientConstraints);
 		
-		mPatientPanel = new JPanel();
-		mPatientPanel.setLayout(new BoxLayout(mPatientPanel,BoxLayout.X_AXIS));
-		mSuperPatientPanel.add(mPatientPanel);
-		
-		mGenderLabel.setPreferredSize(new Dimension(90,25));
-		mGenderLabel.setMaximumSize(new Dimension(90,25));
-		mGenderLabel.setMinimumSize(new Dimension(90,25));
-		mPatientPanel.add(mGenderLabel);
-		
-		mPatientPanel.add(Box.createHorizontalGlue());
-		mGenderGroup.add(mMaleButton);
+		patientConstraints.gridx=3;
+		patientConstraints.gridy=3;
+		patientConstraints.gridwidth=1;
 		mGenderGroup.add(mFemaleButton);
-		mPatientPanel.add(mMaleButton);
-		mPatientPanel.add(mFemaleButton);
+		mGenderGroup.add(mMaleButton);
+		mPatientPanel.add(mFemaleButton, patientConstraints);
+		patientConstraints.gridx=4;
+		patientConstraints.gridy=3;
+		patientConstraints.gridwidth=1;
+		mPatientPanel.add(mMaleButton, patientConstraints);
 		
+		// Insurance
 		
-		mPatientPanel = new JPanel();
-		mPatientPanel.setLayout(new BoxLayout(mPatientPanel, BoxLayout.X_AXIS));
-		mSuperPatientPanel.add(mPatientPanel);
+		patientConstraints.gridx=0;
+		patientConstraints.gridy=4;
+		patientConstraints.gridwidth=2;
+		mPatientPanel.add(mInsuranceLabel, patientConstraints);
 		
-		mInsuranceLabel.setPreferredSize(new Dimension(90,25));
-		mInsuranceLabel.setMaximumSize(new Dimension(90,25));
-		mInsuranceLabel.setMinimumSize(new Dimension(90,25));
-		mPatientPanel.add(mInsuranceLabel);
+		patientConstraints.gridx=3;
+		patientConstraints.gridy=4;
+		mPatientPanel.add(mInsuranceBox, patientConstraints);
 		
-		mPatientPanel.add(Box.createHorizontalGlue());				//czy to tak?
-		//mInsuranceBox = this.createInsuranceComboBox();
-		mInsuranceBox.setPreferredSize(new Dimension(180,20));
-		mInsuranceBox.setMinimumSize(new Dimension(180,20));
-		mInsuranceBox.setMaximumSize(new Dimension(180,20));
-		mPatientPanel.add(mInsuranceBox);
-		
-	
-		mPatientPanel = new JPanel();
-		mPatientPanel.setLayout(new BoxLayout(mPatientPanel, BoxLayout.X_AXIS));
-		mSuperPatientPanel.add(mPatientPanel);
-		
-		
-		mPatientPanel.add(mSaveButton);
-		mPatientPanel.add(mCancellButton);
-		mPatientPanel.add(Box.createHorizontalGlue());
-		
-		
-		
-		// patientListPanel
-		
-	
-		
-	//	mPatientListPanel.add(mPatientTable);
-	//	mPatientListPanel.setLayout(new BorderLayout());
-	//	mPatientListPanel.add(mPatientTable.getTableHeader(), BorderLayout.PAGE_START);
-	//	mPatientListPanel.add(mPatientTable, BorderLayout.CENTER);
-	//	mPatientPanel.add(mSaveButton, BorderLayout.SOUTH);
-		
+		// Buttons
+		patientConstraints.gridx=0;
+		patientConstraints.gridy=5;
+		patientConstraints.gridwidth=1;
+		mPatientPanel.add(mSaveButton, patientConstraints);
+		patientConstraints.gridx=1;
+		patientConstraints.gridy=5;
+		mPatientPanel.add(mCancellButton, patientConstraints);
 		
 		//========================================================= examPanel
 		GridBagLayout examLayout = new GridBagLayout();
@@ -253,13 +241,42 @@ public class AppView extends JFrame implements ActionListener {
 		
 		//++++++++++++++++++++++++++++++++++++++++++++++++++ Table
 		
+		GridBagLayout listLayout = new GridBagLayout();
+		mPatientListPanel.setLayout(listLayout);
+		GridBagConstraints listConstraints = new GridBagConstraints();
+		
+		listConstraints.fill=GridBagConstraints.BOTH;
+		listConstraints.weightx=0.5;
+		listConstraints.weighty=0.5;
+		listConstraints.gridx=0;
+		listConstraints.gridy=0;
+		listConstraints.gridheight=2;
+		listConstraints.gridwidth=8;
+		listConstraints.insets = new Insets(5,5,5,5); 
+		
+		
 		JPanel patientList = new PatientTable();
-		patientList.setOpaque(true);
-		mPatientListPanel.add(patientList);
-		patientList.setVisible(true);
 		
+		mPatientListPanel.add(patientList, listConstraints);
 		
+		listConstraints.fill=GridBagConstraints.HORIZONTAL;
+		listConstraints.anchor=GridBagConstraints.LAST_LINE_START;
+		listConstraints.insets = new Insets(5,5,5,10);
+		listConstraints.gridx=0;
+		listConstraints.gridy=2;
+		listConstraints.gridheight=1;
+		listConstraints.gridwidth=1;
+		mPatientListPanel.add(mAddButton, listConstraints);
+		
+		listConstraints.gridx=1;
+		listConstraints.gridy=2;
+		listConstraints.insets = new Insets(5,5,5,300);
+		mPatientListPanel.add(mDeleteButton, listConstraints);
 		// REALLY USEFUL FUNCTION BLESSINGS BE UPON YOU MR FROM STACKOVERFLOW
+		
+		
+		
+		
 		mMainPanel.revalidate();
 		mMainPanel.repaint();
 		
@@ -291,11 +308,11 @@ public class AppView extends JFrame implements ActionListener {
 	{
 		// JPanels for patient panel
 		mMainPanel = new JPanel();
-		mSuperPatientPanel = new JPanel();
+		
 		mPatientPanel = new JPanel();
 		mExaminationPanel = new JPanel();
 		mPatientListPanel = new JPanel();
-		mMinorPanel = new JPanel();
+		
 		// JLabels for patient panel
 		this.mNameLabel = new JLabel("Imie:");
 		this.mSurnameLabel = new JLabel("Nazwisko:");
@@ -386,73 +403,28 @@ public class AppView extends JFrame implements ActionListener {
 	//private void setGui() {
 	
 	// Main Panel for placing other panels
-//	JPanel mainPanel = new JPanel();
-//	this.getContentPane().add(mainPanel);
-//	mainPanel.setPreferredSize(new Dimension(1000, 600));
-//	mainPanel.setBackground(Color.gray);
-//	this.pack();
-	
-	/*
-	
-	// setting layout of JPanels
-			GridBagLayout mainLayout = new GridBagLayout();
-			mainPanel.setLayout(mainLayout);
-			GridBagConstraints c = new GridBagConstraints();
-	
-	
-	// Creating JPanel for each part of an app
-			
-	//Patient Panel
-	JPanel patientPanel = new JPanel();
-	c.fill=GridBagConstraints.BOTH;
-	c.weightx = 0.5;
-	c.weighty = 0.5;
-	c.gridx = 0;
-	c.gridy = 0;
-	mainPanel.add(patientPanel,c);
-	patientPanel.setBorder(BorderFactory.createTitledBorder("Dane pacjenta"));
-	
-	// Examination Panel
-	JPanel examPanel = new JPanel();
-	c.fill=GridBagConstraints.BOTH;
-	c.weightx = 0.5;
-	c.weighty = 0.5;
-	c.gridx=0;
-	c.gridy=1;
-	mainPanel.add(examPanel,c);
-	examPanel.setBorder(BorderFactory.createTitledBorder("Badanie"));
-	
-	// List Panel
-	JPanel listPanel = new JPanel();
-	c.fill=GridBagConstraints.BOTH;
-	c.weightx = 1;
-	c.weighty = 1;
-	c.gridx=1;
-	c.gridy=0;
-	c.gridheight=2;
-	mainPanel.add(listPanel,c);
-	listPanel.setBorder(BorderFactory.createTitledBorder("Lista pacjentow"));
+//	
 	
 	// Setting layout for patient panel
-	GroupLayout patientLayout = new GroupLayout(patientPanel);
-	patientPanel.setLayout(patientLayout);
+//	GroupLayout patientLayout = new GroupLayout(patientPanel);
+	//patientPanel.setLayout(patientLayout);
 	
 	// patient panel components
-	JLabel name = new JLabel("Imie:");
-	JTextField nameTextField = new JTextField();
-	JLabel surname = new JLabel("Nazwisko:");
-	JTextField surnameTextField = new JTextField();
-	JLabel pesel = new JLabel("PESEL:");
-	JTextField peselTextField = new JTextField();
-	JLabel gender = new JLabel("Plec:");
-	JLabel insurance =  new JLabel("Ubezpieczenie:");
+	//JLabel name = new JLabel("Imie:");
+//	JTextField nameTextField = new JTextField();
+	//JLabel surname = new JLabel("Nazwisko:");
+//	JTextField surnameTextField = new JTextField();
+//	JLabel pesel = new JLabel("PESEL:");
+//	JTextField peselTextField = new JTextField();
+//	JLabel gender = new JLabel("Plec:");
+//	JLabel insurance =  new JLabel("Ubezpieczenie:");
 	
 	
-	patientLayout.setAutoCreateGaps(true);
+//	patientLayout.setAutoCreateGaps(true);
 	// not working
 	//patientLayout.setHorizontalGroup(patientLayout.createSequentialGroup().addGroup(patientLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(name).addComponent(surname).addComponent(pesel).addComponent(gender).addComponent(gender)));
 	
-	*/
+//	*/
 	
 //}
 	

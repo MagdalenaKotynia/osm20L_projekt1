@@ -13,6 +13,8 @@ public class PatientTable extends JPanel implements ActionListener {
 	private JTable table;
 	private ArrayList<Patient> patient;
 	
+	
+	
 	public PatientTable() {
 		initializePanel();
 		
