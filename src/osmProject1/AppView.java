@@ -19,12 +19,15 @@ public class AppView extends JFrame implements ActionListener {
 	//private Border mPatientBorder;
 	private ButtonGroup mGenderGroup;
 	//private Box mGenderBox;
-	private JPanel mMainPanel, mPatientPanel, mExaminationPanel, mPatientListPanel, patientList;;
+	private JPanel mMainPanel, mPatientPanel, mExaminationPanel, mPatientListPanel, patientList , testList;
 	//private JTable mPatientTable;
 	private JCheckBox mGhbCheckBox;
 	private JDateChooser mDateCalendar;
 	
-	
+	private JTable table;
+	private ArrayList<Patient> mData;
+	private myTable tableModel;
+	private Patient test;
 	
 	
 	
@@ -32,7 +35,7 @@ public class AppView extends JFrame implements ActionListener {
 	
 	
 	//private String[] columnNames; //?? czy aby tak
-	//private ArrayList<Patient> mData; //czy aby tak
+	
 	
 	
 	// constructor
@@ -254,8 +257,20 @@ public class AppView extends JFrame implements ActionListener {
 		
 		
 		
-		
-		mPatientListPanel.add(patientList, listConstraints);
+		test.setName("Janusz");
+		test.setSurname("Korran-Mekka");
+		test.setPESEL("1234567890");
+		test.setExam(new Examination());
+		mData.add(test);
+		mData.add(new Patient("Eryk", "Nowacki", "980331112345", "Brak", "Kobieta", null ));
+
+		table = new JTable(tableModel);
+		table.setAutoCreateRowSorter(true);
+		JScrollPane scrollPane = new JScrollPane(table);				
+		testList.setLayout(new BorderLayout());
+		testList.add(scrollPane, BorderLayout.CENTER);
+		mPatientListPanel.add(testList, listConstraints);
+		//mPatientListPanel.add(patientList, listConstraints);
 		
 		listConstraints.fill=GridBagConstraints.HORIZONTAL;
 		listConstraints.anchor=GridBagConstraints.LAST_LINE_START;
@@ -333,7 +348,11 @@ public class AppView extends JFrame implements ActionListener {
 		
 		this.mAddButton = new JButton("Dodaj");
 		this.mDeleteButton = new JButton("Usun");
-		this.patientList = new PatientTable();
+		this.test = new Patient();
+		this.mData = new ArrayList<Patient>();
+		this.tableModel = new myTable(mData);
+		this.testList = new JPanel();
+		//this.patientList = new PatientTable();
 		
 		// mExaminationPanel components 
 		//Labels

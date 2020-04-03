@@ -34,7 +34,7 @@ public class myTable extends AbstractTableModel{
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		Object temp =null;
 		if(columnIndex==0) {
-			temp = patient.get(rowIndex).getName();				//add surname
+			temp = patient.get(rowIndex).getName() +" "+ patient.get(rowIndex).getSurname();				//add surname
 		}else if(columnIndex==1){
 			temp = patient.get(rowIndex).getGender();
 		}else if(columnIndex==2) {
@@ -42,7 +42,13 @@ public class myTable extends AbstractTableModel{
 		}else if(columnIndex==3) {
 			temp = patient.get(rowIndex).getInsurance();
 		}else if(columnIndex==4){
-			temp = patient.get(rowIndex).getExam();
+			if (patient.get(rowIndex).getExam() == null){
+				temp = false;
+			}else if (patient.get(rowIndex).getExam() != null) {
+				temp = true;
+			}
+			
+			
 		}
 		return temp;
 	}
@@ -53,7 +59,7 @@ public class myTable extends AbstractTableModel{
 	@Override
 	public Class getColumnClass(int col) {
 		if(col==4) {
-			return Examination.class;
+			return Boolean.class;
 		}else{
 			return String.class;
 		}
@@ -61,7 +67,7 @@ public class myTable extends AbstractTableModel{
 
 	public boolean isCellEditable(int rwo, int col) {
 		
-		if (col<2) {
+		if (col<6) {
 			return false;
 		}else {
 			return true;
