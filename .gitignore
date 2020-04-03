@@ -11,3 +11,5 @@ tmp/
 *.swp
 
 *~.nib
+
+.classpath
