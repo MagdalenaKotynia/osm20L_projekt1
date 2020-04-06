@@ -3,12 +3,12 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-public class myTable extends AbstractTableModel{
+public class MyTable extends AbstractTableModel{
 	
-	private String[] columnNames = {"Imię i Nazwisko", "Płec", "PESEL", "Ubezpieczenie", "Badanie"};
-	private ArrayList<Patient> patient;
+	private String[] columnNames = {"Imie i Nazwisko", "Plec", "PESEL", "Ubezpieczenie", "Badanie"};
+	protected ArrayList<Patient> patient;
 	
-	public myTable(ArrayList<Patient> clist) {
+	public MyTable(ArrayList<Patient> clist) {
 		this.patient=clist;
 	}
 	

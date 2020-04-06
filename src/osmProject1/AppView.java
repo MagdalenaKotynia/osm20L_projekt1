@@ -10,24 +10,26 @@ import java.awt.event.ActionListener;
 public class AppView extends JFrame implements ActionListener {
 
 	/* Attributes */
-	private JTextField mNameTxt, mSurnameTxt, mPESELTxt, mBloodGlucoseLevelTxt, mUrineSugarLevelTxt;
+	protected JTextField mNameTxt, mSurnameTxt, mPESELTxt, mBloodGlucoseLevelTxt, mUrineSugarLevelTxt;
 	private JLabel mNameLabel, mSurnameLabel, mPESELLabel, mGenderLabel, mInsuranceLabel, mDateLabel,  
 	mGhbPresenceLabel, mBloodGlucoseLevelLabel, mUrineSugarLevelLabel;
-	private JButton mSaveButton, mCancellButton, mSaveExamButton, mCancelExamButton, mAddButton, mDeleteButton;
-	private JRadioButton mMaleButton, mFemaleButton;
-	private JComboBox<String> mInsuranceBox;
+	protected JButton mSaveButton, mCancellButton, mSaveExamButton, mCancelExamButton, mAddButton, mDeleteButton;
+	protected JRadioButton mMaleButton, mFemaleButton;
+	protected JComboBox<String> mInsuranceBox;
 	//private Border mPatientBorder;
-	private ButtonGroup mGenderGroup;
+	protected ButtonGroup mGenderGroup;
 	//private Box mGenderBox;
 	private JPanel mMainPanel, mPatientPanel, mExaminationPanel, mPatientListPanel, patientList , testList;
 	//private JTable mPatientTable;
-	private JCheckBox mGhbCheckBox;
-	private JDateChooser mDateCalendar;
+	protected JCheckBox mGhbCheckBox;
+	protected JDateChooser mDateCalendar;
 	
-	private JTable table;
-	private ArrayList<Patient> mData;
-	private myTable tableModel;
-	private Patient test;
+	protected JTable table;
+	protected ArrayList<Patient> mData;
+	protected MyTable tableModel;
+	protected Patient test;
+	protected ViewListener mListener = null;
+	
 	
 	
 	
@@ -257,14 +259,11 @@ public class AppView extends JFrame implements ActionListener {
 		
 		
 		
-		test.setName("Janusz");
-		test.setSurname("Korran-Mekka");
-		test.setPESEL("1234567890");
-		test.setExam(new Examination());
-		mData.add(test);
+
+		//mData.add(test);
 		mData.add(new Patient("Eryk", "Nowacki", "980331112345", "Brak", "Kobieta", null ));
 
-		table = new JTable(tableModel);
+		
 		table.setAutoCreateRowSorter(true);
 		JScrollPane scrollPane = new JScrollPane(table);				
 		testList.setLayout(new BorderLayout());
@@ -349,9 +348,16 @@ public class AppView extends JFrame implements ActionListener {
 		this.mAddButton = new JButton("Dodaj");
 		this.mDeleteButton = new JButton("Usun");
 		this.test = new Patient();
+		
+		test.setName("Janusz");
+		test.setSurname("Korran-Mekka");
+		test.setPESEL("1234567890");
+		test.setExam(new Examination());
+		
 		this.mData = new ArrayList<Patient>();
-		this.tableModel = new myTable(mData);
+		this.tableModel = new MyTable(mData);
 		this.testList = new JPanel();
+		this.table = new JTable(tableModel);
 		//this.patientList = new PatientTable();
 		
 		// mExaminationPanel components 
@@ -371,17 +377,41 @@ public class AppView extends JFrame implements ActionListener {
 		
 	}
 	
+	public void setController(ActionListener c)
+	{
+		this.mNameTxt.addActionListener(c);
+		this.mSurnameTxt.addActionListener(c);
+		this.mInsuranceBox.addActionListener(c);
+		this.mMaleButton.addActionListener(c);
+		this.mFemaleButton.addActionListener(c);
+		this.mBloodGlucoseLevelTxt.addActionListener(c);
+		this.mGhbCheckBox.addActionListener(c);
+		this.mUrineSugarLevelTxt.addActionListener(c);
+		this.mAddButton.addActionListener(c);
+	}
+	
 
 
 	
 	// ========================================================================================= trash code for possible reuse
 	
 	
-	
 	public void actionPerformed(ActionEvent evt) {
 		if (evt.getActionCommand().equals("Zamknij")) {
 			this.dispose();
 		}
+//		else if (evt.getActionCommand().equals("Dodaj"))
+//		{
+////			this.mData.add(this.test);
+////			this.table = new JTable(this.tableModel);
+//			this.dispose();
+//		}
+		
+	}
+	
+	public void addListener(ViewListener listener)
+	{
+		this.mListener=listener;
 	}
 	
 	

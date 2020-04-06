@@ -2,8 +2,15 @@ package osmProject1;
 import java.util.*;
 
 public class AppModel {
+	
+	
 
-	private ArrayList<Patient> mList;
+	protected ArrayList<Patient> mList;
+	//protected Patient mPatient;
+	
+	
+
+	//redundancja przenies appModel do myTable
 	
 	public AppModel()
 	{
@@ -12,6 +19,7 @@ public class AppModel {
 	
 	public void add(Patient patient) {
 		mList.add(patient);
+		
 	}
 	
 	public ArrayList<Patient> getPatients(){
@@ -27,6 +35,7 @@ public class AppModel {
 	
 	public void remove(Patient patient) {
 		mList.remove(patient);
+
 	}
 	
 
