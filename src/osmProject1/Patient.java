@@ -14,11 +14,11 @@ public class Patient {
 
 	public Patient() {}
 	
-	public Patient(String name, String surname, String patient, String insurance, String gender, Examination exam) {
-		setPatient(name, surname, patient, insurance, gender, exam);
+	public Patient(String name, String surname,String gender, String pesel, String insurance, Examination exam) {
+		setPatient(name, surname, gender, pesel, insurance, exam);
 	}
 	public Patient(Patient patient) {
-		this(patient.mName, patient.mSurname, patient.mPESEL, patient.mInsurance, patient.mGender, patient.mExam);
+		this(patient.mName, patient.mSurname, patient.mGender, patient.mPESEL, patient.mInsurance, patient.mExam);
 	}
 	
 	/*Setters*/
@@ -40,10 +40,10 @@ public class Patient {
 	public void setExam(Examination exam) {
 		this.mExam=exam;
 	}
-	public void setPatient(String name, String surname, String patient, String insurance, String gender, Examination exam) {
+	public void setPatient(String name, String surname, String gender, String pesel, String insurance, Examination exam) {
 		this.mName=name;
 		this.mSurname=surname;
-		this.mPESEL=patient;
+		this.mPESEL=pesel;
 		this.mInsurance=insurance;
 		this.mGender=gender;
 		this.mExam=exam;
@@ -72,7 +72,7 @@ public class Patient {
 	}
 	
 	/* Method for verifying validity of given patient ---- may not be necessary */
-	public static boolean checkPatient(String n, String s, String p, String i, String g) {
+	public static boolean checkPatient(String n, String s,String g, String p, String i) {
 		// TODO Consider if condition for now it is not very useful and add condition for mExam
 		if(n.isBlank() || s.isBlank() || p.length()!=11 || i.isBlank() || g.isBlank()) {
 			return(false);
@@ -99,8 +99,8 @@ public class Patient {
 	
 	/*Printing method*/
 	public String toString() {
-		return("Imie: " + this.mName +" Nazwisko: " + this.mSurname + " PESEL: " + this.mPESEL + " Ubezpieczenie: " + 
-	this.mInsurance + " Plec: " + this.mGender);
+		return("Imie: " + this.mName +" Nazwisko: " + this.mSurname + " Plec: " + this.mGender + " PESEL: " + this.mPESEL + " Ubezpieczenie: " + 
+	this.mInsurance );
 	}
 
 	

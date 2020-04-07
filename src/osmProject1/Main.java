@@ -9,7 +9,7 @@ public class Main {
 		AppView view = new AppView();
 		AppModel model = new AppModel();
 		AppController ctrl = new AppController(view,model);
-		MyActionListener testListener = new MyActionListener();
+		//MyActionListener testListener = new MyActionListener();
 	}
 
 }

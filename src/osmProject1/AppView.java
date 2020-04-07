@@ -27,8 +27,6 @@ public class AppView extends JFrame implements ActionListener {
 	protected JTable table;
 	protected ArrayList<Patient> mData;
 	protected MyTable tableModel;
-	protected Patient test;
-	protected ViewListener mListener = null;
 	
 	
 	
@@ -347,12 +345,7 @@ public class AppView extends JFrame implements ActionListener {
 		
 		this.mAddButton = new JButton("Dodaj");
 		this.mDeleteButton = new JButton("Usun");
-		this.test = new Patient();
 		
-		test.setName("Janusz");
-		test.setSurname("Korran-Mekka");
-		test.setPESEL("1234567890");
-		test.setExam(new Examination());
 		
 		this.mData = new ArrayList<Patient>();
 		this.tableModel = new MyTable(mData);
@@ -377,22 +370,6 @@ public class AppView extends JFrame implements ActionListener {
 		
 	}
 	
-	public void setController(ActionListener c)
-	{
-		this.mNameTxt.addActionListener(c);
-		this.mSurnameTxt.addActionListener(c);
-		this.mInsuranceBox.addActionListener(c);
-		this.mMaleButton.addActionListener(c);
-		this.mFemaleButton.addActionListener(c);
-		this.mBloodGlucoseLevelTxt.addActionListener(c);
-		this.mGhbCheckBox.addActionListener(c);
-		this.mUrineSugarLevelTxt.addActionListener(c);
-		this.mAddButton.addActionListener(c);
-	}
-	
-
-
-	
 	// ========================================================================================= trash code for possible reuse
 	
 	
@@ -400,89 +377,8 @@ public class AppView extends JFrame implements ActionListener {
 		if (evt.getActionCommand().equals("Zamknij")) {
 			this.dispose();
 		}
-//		else if (evt.getActionCommand().equals("Dodaj"))
-//		{
-////			this.mData.add(this.test);
-////			this.table = new JTable(this.tableModel);
-//			this.dispose();
-//		}
-		
+	
 	}
-	
-	public void addListener(ViewListener listener)
-	{
-		this.mListener=listener;
-	}
-	
-	
-//	JComboBox<String> createInsuranceComboBox()
-//	{
-//		mInsuranceBox = new JComboBox<String>();
-//		mInsuranceBox.addItem("NFZ");
-//		mInsuranceBox.addItem("Prywatne");
-//		mInsuranceBox.addItem("Brak");
-//		mInsuranceBox.setPreferredSize(new Dimension(180,20));
-//		mInsuranceBox.setMinimumSize(new Dimension(180,20));
-//		mInsuranceBox.setMaximumSize(new Dimension(180,20));
-//		return(mInsuranceBox);
-//		
-//	}
-	
-//	UtilDateModel model = new UtilDateModel();
-//	//model.setDate(20,04,2014);
-//	// Need this...
-//	Properties p = new Properties();
-//	p.put("text.today", "Today");
-//	p.put("text.month", "Month");
-//	p.put("text.year", "Year");
-//	JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
-//	// Don't know about the formatter, but there it is...
-//	JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
-//	
-		
-	
-	
-	
-	
-	//private void setGui() {
-	
-	// Main Panel for placing other panels
-//	
-	
-	// Setting layout for patient panel
-//	GroupLayout patientLayout = new GroupLayout(patientPanel);
-	//patientPanel.setLayout(patientLayout);
-	
-	// patient panel components
-	//JLabel name = new JLabel("Imie:");
-//	JTextField nameTextField = new JTextField();
-	//JLabel surname = new JLabel("Nazwisko:");
-//	JTextField surnameTextField = new JTextField();
-//	JLabel pesel = new JLabel("PESEL:");
-//	JTextField peselTextField = new JTextField();
-//	JLabel gender = new JLabel("Plec:");
-//	JLabel insurance =  new JLabel("Ubezpieczenie:");
-	
-	
-//	patientLayout.setAutoCreateGaps(true);
-	// not working
-	//patientLayout.setHorizontalGroup(patientLayout.createSequentialGroup().addGroup(patientLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(name).addComponent(surname).addComponent(pesel).addComponent(gender).addComponent(gender)));
-	
-//	*/
-	
-//}
-	
-	
-//	private void setPatientPanel(JPanel patientPanel) {
-//		patientPanel = new JPanel();
-//		patientPanel.setBorder(new TitledBorder(new LineBorder(Color.black, 5),
-//		        "Pacjent"));
-				
-//	}
-	
-	
-	
-	
-	
+
 
 }

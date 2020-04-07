@@ -22,6 +22,10 @@ public class AppModel {
 		
 	}
 	
+	public void addExamToPatient(Patient patient, Examination exam)
+	{
+		patient.setExam(exam);
+	}
 	public ArrayList<Patient> getPatients(){
 		return mList;
 	}
@@ -42,16 +46,7 @@ public class AppModel {
 
 }
 
-/*	public void createPatient(String name, String surname, String pesel, String insurance, String gender, Examination exam )
-	{
-		
-		
-		addPatient(new Patient(name, surname, pesel, insurance, gender, exam));
-		
-	}
-	
-	
-	 */
+
 	
 	
 	
