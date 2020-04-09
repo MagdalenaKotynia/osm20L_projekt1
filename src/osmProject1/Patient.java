@@ -6,8 +6,8 @@ public class Patient {
 	private String mName = null;
 	private String mSurname = null;
 	private String mPESEL = null;
-	private String mInsurance = "NFZ";			
-	private String mGender = "Mezczyzna";
+	private String mInsurance = null;			
+	private String mGender = null;
 	private Examination mExam = null;	
 	
 	

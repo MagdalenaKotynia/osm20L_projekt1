@@ -1,10 +1,12 @@
 package osmProject1;
-import java.awt.*;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Scanner;
+import java.awt.*;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -20,6 +22,7 @@ public class AppController
 	{
 		this.mView = view;
 		this.mModel = model;
+			
 		this.visualizePatientTable();
 		this.setListeners();
 	}
@@ -27,6 +30,82 @@ public class AppController
 	//sets ActionListeners to buttons
 	private void setListeners() 
 	{
+		
+		this.mView.menuItem.addActionListener(new ActionListener(){
+			
+			public void actionPerformed(ActionEvent evt) {
+				if (evt.getActionCommand().equals("Zamknij")) {
+					mView.dispose();
+				}
+			}
+		});
+		
+		this.mView.mGhbCheckBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				if(mView.mGhbCheckBox.isSelected()) {
+					mView.mGhbCheckBox.setBackground(Color.RED);
+					mView.mGhbCheckBox.setOpaque(true);
+				}else {
+					mView.mGhbCheckBox.setOpaque(false);
+				}
+				
+			}
+		});
+		
+		
+		this.mView.mBloodGlucoseLevelTxt.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent evt) {
+				
+			}
+			public void removeUpdate(DocumentEvent evt) {
+				
+				changeColor();
+			}
+			public void insertUpdate(DocumentEvent evt) {
+				
+				changeColor();
+				
+			}
+		});
+		
+		this.mView.mPESELTxt.getDocument().addDocumentListener(new DocumentListener() {
+		
+		public void changedUpdate(DocumentEvent evt) {}
+		public void removeUpdate(DocumentEvent evt) {
+			
+			
+		}
+		public void insertUpdate(DocumentEvent evt) {
+			
+			if(!mView.mPESELTxt.getText().matches("-?\\d+(\\.\\d+)?") || mView.mPESELTxt.getText().length()>11) {
+				
+				mView.mPESELTxt.setText("");
+				
+			}
+			
+			
+		}
+		});
+		
+		this.mView.mUrineSugarLevelTxt.getDocument().addDocumentListener(new DocumentListener() {
+			
+			public void changedUpdate(DocumentEvent evt) {
+				
+			}
+			public void removeUpdate(DocumentEvent evt) {
+				
+				changeColorOfUrine();
+			}
+			public void insertUpdate(DocumentEvent evt) {
+				
+				changeColorOfUrine();
+				
+			}
+		});
+			
+			
+		
+		
 		this.mView.mSaveButton.addActionListener(new ActionListener() 
 		{
 
@@ -45,6 +124,7 @@ public class AppController
 				
 			}		
 		});
+		
 		this.mView.mAddButton.addActionListener((new ActionListener()
 		{
 
@@ -60,10 +140,14 @@ public class AppController
 		}));
 		this.mView.mSaveExamButton.addActionListener((new ActionListener()
 		{
-
+			
+			
+			
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
+				try {
+				
 				int selectedPatientIdx = mView.table.getSelectedRow();
 				Examination exam = prepareExamFromForm();
 				if (selectedPatientIdx == -1)
@@ -74,7 +158,17 @@ public class AppController
 				{
 					updateExamData(selectedPatientIdx);
 				}
-			}		
+				
+				}
+				catch(Exception evt) {
+					JOptionPane.showMessageDialog(mView, "Nie utworzono pacjenta do którego można by było dodać badanie! \n"
+							+ " Proszę najpierw wprowadzić i zapisać dane w panelu pacjenta!");
+				}
+				
+			}	
+			
+			
+			
 		}));
 		this.mView.mCancellButton.addActionListener((new ActionListener()
 		{
@@ -101,10 +195,16 @@ public class AppController
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				//TO DO add exception handling if any patient is not selected and you press button
-				deletePatientFromList();
-				visualizePatientTable();
+				try {
 				
+				deletePatientFromList();
+				clearExamFields();
+				clearPatientFields();
+				visualizePatientTable();
+				}
+				catch(Exception evt) {
+					JOptionPane.showMessageDialog(mView, "Nie zaznaczono pacjenta do usunięcia lub nie ma czego usuwać!");
+				}
 			}
 		}));
 		this.mView.table.getSelectionModel().addListSelectionListener((ListSelectionListener) (new ListSelectionListener()
@@ -117,6 +217,7 @@ public class AppController
 						if(selectedPatientIdx > -1)
 						{
 							getPatientFromTable(selectedPatientIdx);
+							
 						}
 						
 					}
@@ -146,8 +247,46 @@ public class AppController
 		}
 		else
 		{
-			gender = this.mView.mFemaleButton.getText(); //TO DO more clever exception??
+			gender = null; 
 		}
+		// TODO FIX PATIENT UPDATE
+		boolean PESELtest = mModel.mList.contains(new Patient(this.mView.mNameTxt.getText(),
+							this.mView.mSurnameTxt.getText(),
+							gender,
+							this.mView.mPESELTxt.getText(),
+							(String)this.mView.mInsuranceBox.getSelectedItem(),null));
+		if(PESELtest==true) {
+			this.mView.mPESELTxt.setText(null);
+			JOptionPane.showMessageDialog(mView, "Pacjent o podanym numerze PESEL już istnieje!");
+			
+			
+			
+		}
+		return new Patient(this.mView.mNameTxt.getText(),
+				this.mView.mSurnameTxt.getText(),
+				gender,
+				this.mView.mPESELTxt.getText(),
+				(String)this.mView.mInsuranceBox.getSelectedItem(),null);
+	}
+		
+		private Patient preparePatientFromFormUpdate()
+		{
+			String gender;
+			
+			if (this.mView.mMaleButton.isSelected())
+			{
+				gender = this.mView.mMaleButton.getText();
+			}
+			else if (this.mView.mFemaleButton.isSelected())
+			{
+				gender = this.mView.mFemaleButton.getText();
+			}
+			else
+			{
+				gender = null; 
+			}
+			
+		
 		return new Patient(this.mView.mNameTxt.getText(),
 							this.mView.mSurnameTxt.getText(),
 							gender,
@@ -224,6 +363,7 @@ public class AppController
 			this.mView.mMaleButton.setSelected(true);
 		}
 		this.mView.mInsuranceBox.setSelectedItem(selectedPatient.getInsurance());
+		
 		if (selectedPatient.getExam()!=null)
 		{
 			String BloodGlucoseLevelToString = Double.toString(selectedPatient.getExam().getBloodGlucoseLevel());
@@ -232,18 +372,80 @@ public class AppController
 			this.mView.mBloodGlucoseLevelTxt.setText(BloodGlucoseLevelToString);
 			this.mView.mUrineSugarLevelTxt.setText(UrineSugarLevelToString);
 			this.mView.mGhbCheckBox.setSelected(selectedPatient.getExam().getGhb());	
+		}else {
+			this.mView.mDateCalendar.setDate(null);
+			this.mView.mBloodGlucoseLevelTxt.setText(null);
+			this.mView.mUrineSugarLevelTxt.setText(null);
+			this.mView.mGhbCheckBox.setSelected(false);
 		}
 	}
+	
+	private void changeColor() {
+		try {
+		if(!mView.mBloodGlucoseLevelTxt.getText().trim().isEmpty()) {
+		
+		double bloodGlucoseLevelTxtToDouble1 = Double.parseDouble(mView.mBloodGlucoseLevelTxt.getText());
+		if (bloodGlucoseLevelTxtToDouble1<70 || bloodGlucoseLevelTxtToDouble1>99) {
+				mView.mBloodGlucoseLevelTxt.setForeground(Color.RED);
+				
+			}else {
+				mView.mBloodGlucoseLevelTxt.setForeground(Color.GREEN);
+			}
+		}
+		}
+		catch(Exception e) {
+			JOptionPane.showMessageDialog(mView, "Nieprawidłowe dane wejściowe!");
+			mView.mBloodGlucoseLevelTxt.setForeground(Color.RED);
+		}
+	}
+	
+	private void changeColorOfUrine() {
+		try {
+		if(!mView.mUrineSugarLevelTxt.getText().trim().isEmpty()) {
+			
+			double urineLevels = Double.parseDouble(mView.mUrineSugarLevelTxt.getText());
+			if (urineLevels>0.8 || urineLevels<0) {
+					mView.mUrineSugarLevelTxt.setForeground(Color.RED);
+					
+				}else {
+					mView.mUrineSugarLevelTxt.setForeground(Color.GREEN);
+				}
+			}
+		}
+		catch(Exception e) {
+			
+			JOptionPane.showMessageDialog(mView, "Nieprawidłowe dane wejściowe!");
+			mView.mUrineSugarLevelTxt.setForeground(Color.RED);	
+		}
+		
+		}
+	
 	
 	//updates data of Patient selected from PatientTable
 	private void updatePatientData(int selectedPatientIdx)
 	{
-		Patient data = preparePatientFromForm();
+		Patient data = preparePatientFromFormUpdate();
+		
+		boolean PESELtest = this.mModel.mList.contains(new Patient(this.mView.mNameTxt.getText(),
+				this.mView.mSurnameTxt.getText(),
+				null,
+				this.mView.mPESELTxt.getText(),
+				(String)this.mView.mInsuranceBox.getSelectedItem(),null));
+		
+		if(PESELtest==true) {
+			JOptionPane.showMessageDialog(mView, "Pacjent o podanym numerze PESEL już istnieje!");
+			return;
+		
+		}
+		
 
 		for(int col=0; col<(this.mView.tableModel.getColumnCount()-1);col++ )
 		{
 		this.mView.tableModel.setValueAt(data, selectedPatientIdx, col);
 		}		
+		
+		
+		
 	}
 	
 	private void updateExamData(int selectedPatientIdx)

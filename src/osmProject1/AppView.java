@@ -7,7 +7,7 @@ import com.toedter.calendar.*;
 import java.awt.event.ActionListener;
 
 
-public class AppView extends JFrame implements ActionListener {
+public class AppView extends JFrame  {
 
 	/* Attributes */
 	protected JTextField mNameTxt, mSurnameTxt, mPESELTxt, mBloodGlucoseLevelTxt, mUrineSugarLevelTxt;
@@ -27,9 +27,9 @@ public class AppView extends JFrame implements ActionListener {
 	protected JTable table;
 	protected ArrayList<Patient> mData;
 	protected MyTable tableModel;
-	
-	
-	
+	protected JMenuBar menuBar;
+	protected JMenu menu;
+	protected JMenuItem menuItem;
 	
 	
 	
@@ -259,7 +259,7 @@ public class AppView extends JFrame implements ActionListener {
 		
 
 		//mData.add(test);
-		mData.add(new Patient("Eryk", "Nowacki", "980331112345", "Brak", "Kobieta", null ));
+		//mData.add(new Patient("Eryk", "Nowacki", "980331112345", "Brak", "Kobieta", null ));
 
 		
 		table.setAutoCreateRowSorter(true);
@@ -282,7 +282,7 @@ public class AppView extends JFrame implements ActionListener {
 		listConstraints.gridy=2;
 		listConstraints.insets = new Insets(5,5,5,300);
 		mPatientListPanel.add(mDeleteButton, listConstraints);
-		// REALLY USEFUL FUNCTION BLESSINGS BE UPON YOU MR FROM STACKOVERFLOW
+		
 		
 		mMainPanel.revalidate();
 		mMainPanel.repaint();
@@ -298,15 +298,10 @@ public class AppView extends JFrame implements ActionListener {
 	
 	private void setMenu() {
 		
-		JMenuBar menuBar = new JMenuBar();
+		
 		this.setJMenuBar(menuBar);
 		menuBar.setVisible(true);
-		
-		JMenu menu = new JMenu("Aplikacja");
-		menuBar.add(menu);
-		
-		JMenuItem menuItem = new JMenuItem("Zamknij");
-		menuItem.addActionListener(this);				//add thread handling   need AppControler for proper work
+		menuBar.add(menu);			
 		menu.add(menuItem);
 	}
 	
@@ -338,10 +333,7 @@ public class AppView extends JFrame implements ActionListener {
 		this.mSaveButton = new JButton("Zapisz");
 		this.mCancellButton = new JButton("Anuluj");
 
-	// Table components
-	//	this.mData = new ArrayList<>(); // added <>
-	//	columnNames = new String[] {"Imie i Nazwisko","Plec", "PESEL","Ubezpieczenie","Badanie"} ;//czy tedy droga
-	//	this.mPatientTable = new JTable(new PatientTableModel(mData));	//czy tedy droga
+	
 		
 		this.mAddButton = new JButton("Dodaj");
 		this.mDeleteButton = new JButton("Usun");
@@ -351,13 +343,13 @@ public class AppView extends JFrame implements ActionListener {
 		this.tableModel = new MyTable(mData);
 		this.testList = new JPanel();
 		this.table = new JTable(tableModel);
-		//this.patientList = new PatientTable();
+		
 		
 		// mExaminationPanel components 
 		//Labels
-		this.mBloodGlucoseLevelLabel = new JLabel("Stezenie glukozy we krwi: ");
+		this.mBloodGlucoseLevelLabel = new JLabel("Stezenie glukozy we krwi [mg/dL]: ");
 		this.mGhbPresenceLabel = new JLabel("GHB:");
-		this.mUrineSugarLevelLabel = new JLabel("Poziom cukru w moczu: ");
+		this.mUrineSugarLevelLabel = new JLabel("Poziom cukru w moczu [mmol/L]: ");
 		this.mDateLabel = new JLabel("Data:");
 		//Text fields and such
 		this.mBloodGlucoseLevelTxt = new JTextField(10);
@@ -368,17 +360,13 @@ public class AppView extends JFrame implements ActionListener {
 		this.mSaveExamButton = new JButton("Zapisz");
 		this.mCancelExamButton = new JButton("Anuluj");
 		
+		// MENU 
+		this.menuBar = new JMenuBar();
+		this.menu = new JMenu("Aplikacja");
+		this.menuItem = new JMenuItem("Zamknij");
 	}
 	
-	// ========================================================================================= trash code for possible reuse
-	
-	
-	public void actionPerformed(ActionEvent evt) {
-		if (evt.getActionCommand().equals("Zamknij")) {
-			this.dispose();
-		}
-	
-	}
+
 
 
 }

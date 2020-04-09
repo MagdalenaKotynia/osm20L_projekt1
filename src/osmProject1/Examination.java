@@ -72,7 +72,7 @@ public class Examination {
 		return(false);	
 	}
 	
-	// TODO I wonder whether we should write some checkExam method
+	
 	
 	/* Printing Method */
 	public String toString() {
