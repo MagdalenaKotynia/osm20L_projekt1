@@ -1,5 +1,6 @@
 package osmProject1;
 import java.awt.Color;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -7,6 +8,13 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
+import org.apache.*;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 
 
 public class AppController 
@@ -45,6 +53,42 @@ public class AppController
 					
 				}
 			}
+		});
+		
+		// TODO input control
+		AbstractDocument document = (AbstractDocument) this.mView.mNameTxt.getDocument();
+		document.setDocumentFilter(new DocumentFilter() {
+			
+			public void replace(FilterBypass fb, int offs, int length, String str, AttributeSet a) throws BadLocationException {
+				
+				String text = fb.getDocument().getText(0, fb.getDocument().getLength());
+				text=str;
+				
+				if(!NumberUtils.isCreatable(fb.getDocument().getText(0, fb.getDocument().getLength()))) {
+					
+					super.replace(fb, offs, length, str, a);
+					
+				}else {
+					Toolkit.getDefaultToolkit().beep();
+				}
+				
+				
+			}
+			public void insertString(FilterBypass fb, int offs, String str, AttributeSet a) throws BadLocationException {
+				
+				String text = fb.getDocument().getText(0, fb.getDocument().getLength());
+				text = str;
+				
+				if(NumberUtils.isCreatable(fb.getDocument().getText(0, fb.getDocument().getLength()))) {
+					super.insertString(fb, offs, str, a);
+				}else {
+					Toolkit.getDefaultToolkit().beep();
+				}
+                
+			}
+			
+			
+			
 		});
 		
 		
