@@ -432,11 +432,11 @@ public class AppController
 				this.mView.mPESELTxt.getText(),
 				(String)this.mView.mInsuranceBox.getSelectedItem(),null));
 		
-		if(PESELtest==true) {
-			JOptionPane.showMessageDialog(mView, "Pacjent o podanym numerze PESEL już istnieje!");
-			return;
+	//	if(PESELtest==true) {
+	//		JOptionPane.showMessageDialog(mView, "Pacjent o podanym numerze PESEL już istnieje!");
+	//		return;
 		
-		}
+	//	}
 		
 
 		for(int col=0; col<(this.mView.tableModel.getColumnCount()-1);col++ )
