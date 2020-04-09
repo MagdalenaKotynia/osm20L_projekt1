@@ -92,8 +92,13 @@ public class Patient {
 			if (other.mPESEL!=null)
 				return(false);
 		}
-		else if (!this.mPESEL.equals(other.mPESEL))
-			return(false);
+		else if (!this.mPESEL.equals(other.mPESEL)) {
+			return(false);}
+		else {
+			if(this.mSurname.equals(other.mSurname) || this.mName.equals(other.mName)) {
+		return(false);
+			}
+		}
 		return(true);
 	}
 	

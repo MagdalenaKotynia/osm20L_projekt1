@@ -1,10 +1,9 @@
 package osmProject1;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.util.*;
 import com.toedter.calendar.*;
-import java.awt.event.ActionListener;
+
 
 
 public class AppView extends JFrame  {
@@ -16,14 +15,10 @@ public class AppView extends JFrame  {
 	protected JButton mSaveButton, mCancellButton, mSaveExamButton, mCancelExamButton, mAddButton, mDeleteButton;
 	protected JRadioButton mMaleButton, mFemaleButton;
 	protected JComboBox<String> mInsuranceBox;
-	//private Border mPatientBorder;
 	protected ButtonGroup mGenderGroup;
-	//private Box mGenderBox;
-	private JPanel mMainPanel, mPatientPanel, mExaminationPanel, mPatientListPanel, patientList , testList;
-	//private JTable mPatientTable;
+	private JPanel mMainPanel, mPatientPanel, mExaminationPanel, mPatientListPanel, testList;
 	protected JCheckBox mGhbCheckBox;
 	protected JDateChooser mDateCalendar;
-	
 	protected JTable table;
 	protected ArrayList<Patient> mData;
 	protected MyTable tableModel;
@@ -34,8 +29,9 @@ public class AppView extends JFrame  {
 	
 	
 	
-	//private String[] columnNames; //?? czy aby tak
+
 	
+
 	
 	
 	// constructor
@@ -44,6 +40,8 @@ public class AppView extends JFrame  {
 		this.setFrame();
 		this.setMenu();
 		this.setGui();
+		
+		
 	}
 
 		
@@ -258,8 +256,7 @@ public class AppView extends JFrame  {
 		
 		
 
-		//mData.add(test);
-		//mData.add(new Patient("Eryk", "Nowacki", "980331112345", "Brak", "Kobieta", null ));
+		
 
 		
 		table.setAutoCreateRowSorter(true);
@@ -267,7 +264,6 @@ public class AppView extends JFrame  {
 		testList.setLayout(new BorderLayout());
 		testList.add(scrollPane, BorderLayout.CENTER);
 		mPatientListPanel.add(testList, listConstraints);
-		//mPatientListPanel.add(patientList, listConstraints);
 		
 		listConstraints.fill=GridBagConstraints.HORIZONTAL;
 		listConstraints.anchor=GridBagConstraints.LAST_LINE_START;

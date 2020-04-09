@@ -34,7 +34,7 @@ public class MyTable extends AbstractTableModel{
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		Object temp =null;
 		if(columnIndex==0) {
-			temp = patient.get(rowIndex).getName() +" "+ patient.get(rowIndex).getSurname();				//add surname
+			temp = patient.get(rowIndex).getName() +" "+ patient.get(rowIndex).getSurname();				
 		}else if(columnIndex==1){
 			temp = patient.get(rowIndex).getGender();
 		}else if(columnIndex==2) {

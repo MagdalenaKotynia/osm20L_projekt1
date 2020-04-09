@@ -2,8 +2,6 @@ package osmProject1;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.*;
-
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -43,14 +41,13 @@ public class AppController
 		this.mView.mGhbCheckBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				if(mView.mGhbCheckBox.isSelected()) {
-					mView.mGhbCheckBox.setBackground(Color.RED);
-					mView.mGhbCheckBox.setOpaque(true);
-				}else {
-					mView.mGhbCheckBox.setOpaque(false);
+					JOptionPane.showMessageDialog(mView, "Obecność GHB nie jest normalna dla zdrowego pacjenta!");
+					
 				}
-				
 			}
 		});
+		
+		
 		
 		
 		this.mView.mBloodGlucoseLevelTxt.getDocument().addDocumentListener(new DocumentListener() {
@@ -68,24 +65,7 @@ public class AppController
 			}
 		});
 		
-		this.mView.mPESELTxt.getDocument().addDocumentListener(new DocumentListener() {
 		
-		public void changedUpdate(DocumentEvent evt) {}
-		public void removeUpdate(DocumentEvent evt) {
-			
-			
-		}
-		public void insertUpdate(DocumentEvent evt) {
-			
-			if(!mView.mPESELTxt.getText().matches("-?\\d+(\\.\\d+)?") || mView.mPESELTxt.getText().length()>11) {
-				
-				mView.mPESELTxt.setText("");
-				
-			}
-			
-			
-		}
-		});
 		
 		this.mView.mUrineSugarLevelTxt.getDocument().addDocumentListener(new DocumentListener() {
 			
@@ -119,7 +99,7 @@ public class AppController
 				}
 				else
 				{
-					updatePatientData(selectedPatientIdx); //TO DO refresh Patient Data
+					updatePatientData(selectedPatientIdx); 
 				}
 				
 			}		
@@ -207,6 +187,7 @@ public class AppController
 				}
 			}
 		}));
+		
 		this.mView.table.getSelectionModel().addListSelectionListener((ListSelectionListener) (new ListSelectionListener()
 				{
 
@@ -228,12 +209,12 @@ public class AppController
 	//adds patient to List
 	private void addPatient() 
 	{
-		this.mModel.add(this.preparePatientFromForm());
+		this.mModel.add(this.preparePatientFromFormUpdate());
 	}
 	
 
 	//creates new Patient with data from PatientFields
-	private Patient preparePatientFromForm()
+	private Patient preparePatientFromFormUpdate()
 	{
 		String gender;
 		
@@ -249,53 +230,37 @@ public class AppController
 		{
 			gender = null; 
 		}
-		// TODO FIX PATIENT UPDATE
+		
+		// Condition preventing from adding two patients with the same PESEL
 		boolean PESELtest = mModel.mList.contains(new Patient(this.mView.mNameTxt.getText(),
 							this.mView.mSurnameTxt.getText(),
 							gender,
 							this.mView.mPESELTxt.getText(),
 							(String)this.mView.mInsuranceBox.getSelectedItem(),null));
 		if(PESELtest==true) {
-			this.mView.mPESELTxt.setText(null);
+			
 			JOptionPane.showMessageDialog(mView, "Pacjent o podanym numerze PESEL już istnieje!");
-			
-			
-			
-		}
+			this.mView.mPESELTxt.setText(null);
+			return new Patient(this.mView.mNameTxt.getText(),
+					this.mView.mSurnameTxt.getText(),
+					gender,
+					null,
+					(String)this.mView.mInsuranceBox.getSelectedItem(),null);
+						
+		}else {
 		return new Patient(this.mView.mNameTxt.getText(),
 				this.mView.mSurnameTxt.getText(),
 				gender,
 				this.mView.mPESELTxt.getText(),
 				(String)this.mView.mInsuranceBox.getSelectedItem(),null);
 	}
-		
-		private Patient preparePatientFromFormUpdate()
-		{
-			String gender;
-			
-			if (this.mView.mMaleButton.isSelected())
-			{
-				gender = this.mView.mMaleButton.getText();
-			}
-			else if (this.mView.mFemaleButton.isSelected())
-			{
-				gender = this.mView.mFemaleButton.getText();
-			}
-			else
-			{
-				gender = null; 
-			}
-			
-		
-		return new Patient(this.mView.mNameTxt.getText(),
-							this.mView.mSurnameTxt.getText(),
-							gender,
-							this.mView.mPESELTxt.getText(),
-							(String)this.mView.mInsuranceBox.getSelectedItem(),null);
 	}
+		
 	
 	//visualizes PatientTable and updates if any changes
 	private void visualizePatientTable() {
+		
+		
 		this.mView.mData = this.mModel.mList;
 		this.mView.tableModel.patient = this.mModel.mList;
 		this.mView.tableModel.fireTableDataChanged();
@@ -380,6 +345,7 @@ public class AppController
 		}
 	}
 	
+	// Method for changing font color if the values are out of range 
 	private void changeColor() {
 		try {
 		if(!mView.mBloodGlucoseLevelTxt.getText().trim().isEmpty()) {
@@ -399,6 +365,7 @@ public class AppController
 		}
 	}
 	
+	// Method for changing font color if the values are out of range for diffrent JTextField
 	private void changeColorOfUrine() {
 		try {
 		if(!mView.mUrineSugarLevelTxt.getText().trim().isEmpty()) {
@@ -426,17 +393,6 @@ public class AppController
 	{
 		Patient data = preparePatientFromFormUpdate();
 		
-		boolean PESELtest = this.mModel.mList.contains(new Patient(this.mView.mNameTxt.getText(),
-				this.mView.mSurnameTxt.getText(),
-				null,
-				this.mView.mPESELTxt.getText(),
-				(String)this.mView.mInsuranceBox.getSelectedItem(),null));
-		
-	//	if(PESELtest==true) {
-	//		JOptionPane.showMessageDialog(mView, "Pacjent o podanym numerze PESEL już istnieje!");
-	//		return;
-		
-	//	}
 		
 
 		for(int col=0; col<(this.mView.tableModel.getColumnCount()-1);col++ )
@@ -450,7 +406,7 @@ public class AppController
 	
 	private void updateExamData(int selectedPatientIdx)
 	{
-		Patient data = preparePatientFromForm();
+		Patient data = preparePatientFromFormUpdate();
 		Examination exam = prepareExamFromForm();
 		data.setExam(exam);
 		this.mView.tableModel.setValueAt(data, selectedPatientIdx, this.mView.tableModel.getColumnCount()-1);
