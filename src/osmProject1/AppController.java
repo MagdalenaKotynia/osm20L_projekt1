@@ -49,7 +49,7 @@ public class AppController
 		this.mView.mGhbCheckBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				if(mView.mGhbCheckBox.isSelected()) {
-					JOptionPane.showMessageDialog(mView, "Obecność GHB nie jest normalna dla zdrowego pacjenta!");
+					JOptionPane.showMessageDialog(mView, "Obecnosc GHB nie jest normalna dla zdrowego pacjenta!");
 					
 				}
 			}
@@ -136,15 +136,24 @@ public class AppController
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				int selectedPatientIdx = mView.table.getSelectedRow();
-				if (selectedPatientIdx == -1)
+				try
 				{
-					addPatient();
+					int selectedPatientIdx = mView.table.getSelectedRow();
+					if (selectedPatientIdx == -1)
+					{
+						addPatient();
+					}
+					else
+					{
+						updatePatientData(selectedPatientIdx); 
+					}
 				}
-				else
+				catch(NullPointerException evt)
 				{
-					updatePatientData(selectedPatientIdx); 
+					JOptionPane.showMessageDialog(mView, "Nie mozna zapisac pacjenta. Sprawdz poprawnosc danych");
 				}
+				
+
 				
 			}		
 		});
@@ -155,9 +164,16 @@ public class AppController
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				visualizePatientTable();
-				clearPatientFields();
-				clearExamFields();
+				try
+				{
+					visualizePatientTable();
+					clearPatientFields();
+					clearExamFields();
+				}
+				catch(Exception evt)
+				{
+					JOptionPane.showMessageDialog(mView, "Nie mozna dodac pacjenta do listy. Prosze sprawdzic poprawnosc danych");
+				}
 						
 			}
 				
@@ -184,9 +200,10 @@ public class AppController
 				}
 				
 				}
-				catch(Exception evt) {
-					JOptionPane.showMessageDialog(mView, "Nie utworzono pacjenta do którego można by było dodać badanie! \n"
-							+ " Proszę najpierw wprowadzić i zapisać dane w panelu pacjenta!");
+				catch(NumberFormatException evt) {
+					
+					JOptionPane.showMessageDialog(mView, "Nie utworzono pacjenta do ktorego mozna by bylo dodac badanie! \n"
+							+ " Prosze najpierw wprowadzic i zapisac dane w panelu pacjenta!");
 				}
 				
 			}	
@@ -227,7 +244,7 @@ public class AppController
 				visualizePatientTable();
 				}
 				catch(Exception evt) {
-					JOptionPane.showMessageDialog(mView, "Nie zaznaczono pacjenta do usunięcia lub nie ma czego usuwać!");
+					JOptionPane.showMessageDialog(mView, "Nie zaznaczono pacjenta do usuniecia!");
 				}
 			}
 		}));
@@ -253,7 +270,15 @@ public class AppController
 	//adds patient to List
 	private void addPatient() 
 	{
-		this.mModel.add(this.preparePatientFromFormUpdate());
+		if(preparePatientFromFormUpdate()!=null)
+		{
+			this.mModel.add(this.preparePatientFromFormUpdate());
+		}
+		else 
+		{
+			JOptionPane.showMessageDialog(mView, "Pacjent o podanym numerze PESEL juz istnieje!");
+		}
+
 	}
 	
 
@@ -281,17 +306,11 @@ public class AppController
 							gender,
 							this.mView.mPESELTxt.getText(),
 							(String)this.mView.mInsuranceBox.getSelectedItem(),null));
-		if(PESELtest==true) {
-			
-			JOptionPane.showMessageDialog(mView, "Pacjent o podanym numerze PESEL już istnieje!");
-			this.mView.mPESELTxt.setText(null);
-			return new Patient(this.mView.mNameTxt.getText(),
-					this.mView.mSurnameTxt.getText(),
-					gender,
-					null,
-					(String)this.mView.mInsuranceBox.getSelectedItem(),null);
-						
-		}else {
+		if(PESELtest==true)
+		{		
+			return null;		
+		}
+		else {
 		return new Patient(this.mView.mNameTxt.getText(),
 				this.mView.mSurnameTxt.getText(),
 				gender,
@@ -327,7 +346,7 @@ public class AppController
 	//adds Exam to Patient 
 	private void addExamToPatient(Examination exam)
 	{
-		this.mModel.mList.get(this.mModel.mList.size() - 1).setExam(exam);;
+		this.mModel.mList.get(this.mModel.mList.size() - 1).setExam(exam);
 	}
 	
 	//clears fields in PatientPanel
@@ -404,7 +423,7 @@ public class AppController
 		}
 		}
 		catch(Exception e) {
-			JOptionPane.showMessageDialog(mView, "Nieprawidłowe dane wejściowe!");
+			JOptionPane.showMessageDialog(mView, "Nieprawidlowe dane wejsciowe!");
 			mView.mBloodGlucoseLevelTxt.setForeground(Color.RED);
 		}
 	}
@@ -425,7 +444,7 @@ public class AppController
 		}
 		catch(Exception e) {
 			
-			JOptionPane.showMessageDialog(mView, "Nieprawidłowe dane wejściowe!");
+			JOptionPane.showMessageDialog(mView, "Nieprawidlowe dane wejsciowe!");
 			mView.mUrineSugarLevelTxt.setForeground(Color.RED);	
 		}
 		
