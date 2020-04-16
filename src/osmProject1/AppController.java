@@ -274,10 +274,10 @@ public class AppController
 		{
 			this.mModel.add(this.preparePatientFromFormUpdate());
 		}
-		else 
-		{
-			JOptionPane.showMessageDialog(mView, "Pacjent o podanym numerze PESEL juz istnieje!");
-		}
+//		else 
+//		{
+//			JOptionPane.showMessageDialog(mView, "Nie mozna dodac pacjenta. Sprawdz poprawnosc danych");
+//		}
 
 	}
 	
@@ -308,14 +308,24 @@ public class AppController
 							(String)this.mView.mInsuranceBox.getSelectedItem(),null));
 		if(PESELtest==true)
 		{		
+			JOptionPane.showMessageDialog(mView, "Pacjent o podanym numerze PESEL juz istnieje!");
 			return null;		
 		}
 		else {
-		return new Patient(this.mView.mNameTxt.getText(),
-				this.mView.mSurnameTxt.getText(),
-				gender,
-				this.mView.mPESELTxt.getText(),
-				(String)this.mView.mInsuranceBox.getSelectedItem(),null);
+			Patient patient = new Patient(this.mView.mNameTxt.getText(),
+					this.mView.mSurnameTxt.getText(),
+					gender,
+					this.mView.mPESELTxt.getText(),
+					(String)this.mView.mInsuranceBox.getSelectedItem(),null);
+					
+			if (patient.checkPatient()==true)
+			{
+				return patient;
+			}
+			else {
+				JOptionPane.showMessageDialog(mView, "Wprowadzono bledne dane pacjenta");
+				return null;
+			}
 	}
 	}
 		
@@ -454,14 +464,18 @@ public class AppController
 	//updates data of Patient selected from PatientTable
 	private void updatePatientData(int selectedPatientIdx)
 	{
+		
 		Patient data = preparePatientFromFormUpdate();
 		
-		
-
-		for(int col=0; col<(this.mView.tableModel.getColumnCount()-1);col++ )
+		if (data!=null)
 		{
-		this.mView.tableModel.setValueAt(data, selectedPatientIdx, col);
-		}		
+
+			for(int col=0; col<(this.mView.tableModel.getColumnCount()-1);col++ )
+			{
+			this.mView.tableModel.setValueAt(data, selectedPatientIdx, col);
+			}
+		}
+
 		
 		
 		

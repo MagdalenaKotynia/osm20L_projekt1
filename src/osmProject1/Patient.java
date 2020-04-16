@@ -72,11 +72,15 @@ public class Patient {
 	}
 	
 	/* Method for verifying validity of given patient ---- may not be necessary */
-	public static boolean checkPatient(String n, String s,String g, String p, String i) {
+	public boolean checkPatient() {
 		// TODO Consider if condition for now it is not very useful and add condition for mExam
-		if(n.isBlank() || s.isBlank() || p.length()!=11 || i.isBlank() || g.isBlank()) {
+		if(this.mName.isBlank() || isAlphabet(this.mName)==false || this.mSurname.isBlank() || isAlphabet(this.mSurname)==false ||
+				this.mPESEL.length()!=11 ||isNumeric(this.mPESEL) == false || this.mInsurance.isBlank() || this.mGender.isBlank()) 
+		{
 			return(false);
-		}else {
+		}
+		else 
+		{
 			return(true);
 		}
 	}
@@ -108,6 +112,28 @@ public class Patient {
 	this.mInsurance );
 	}
 
+	public static boolean isNumeric(String str)
+	{
+		for (char c : str.toCharArray())
+		{
+			if (!Character.isDigit(c))
+				return false;
+		}
+		return true;
+	}
+	
+	public static boolean isAlphabet(String str)
+	{
+		for (char c: str.toCharArray())
+		{
+			if (!Character.isAlphabetic(c))
+				return false;
+		}
+		return true;
+	}
+		
+	
+	
 	
 	
 	
